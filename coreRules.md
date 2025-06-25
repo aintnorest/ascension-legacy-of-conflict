@@ -24,7 +24,7 @@ Players **MUST** provide terrain pieces to create a dynamic battlefield. Terrain
 
 #### R-1.1.3 Measuring Tools
 
-Players **MUST** use a measuring tape or ruler for all distance measurements.
+Players **MUST** use a measuring tape or ruler for all distance measurements. Since Strides can be interesting to try and measure as they are mm and most measuring tapes don't use mm as the main increment I recommend brining an extra base of every size your force uses. Using them to measure Strides is much easier.
 
 ##### R-1.1.4 Card Deck Composition
 
