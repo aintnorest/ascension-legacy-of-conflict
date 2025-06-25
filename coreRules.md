@@ -53,6 +53,8 @@ If two rules conflict, the more specific rule **ALWAYS** overrides the more gene
 
 ## 2. Resolution Mechanic
 
+**Design Note:** This game uses a card-based resolution mechanic instead of dice to provide a unique probability curve and allow for more strategic play. The card system introduces memory, tension, and the potential for players to track which cards have been played, rewarding skillful planning and risk assessment in a way that dice cannot. It also ensures no one experiences a prolonged bad luck streak, as all cards will eventually be played except for the one card discarded during deck cycling.
+
 ### R-2.1.1 Card Value Assignment
 
 Each card in the custom deck has a specific value:
@@ -70,7 +72,9 @@ When a random outcome is required, the active player **MUST** flip two cards fro
 
 ### R-2.1.3 Deck Cycling
 
-After cards are flipped, they **MUST** be placed in a discard pile. When the deck is empty, shuffle the discard pile to form a new deck.
+After cards are flipped, they **MUST** be placed in a discard pile face down. When the deck is empty, shuffle the discard pile to form a new deck. The discard pile contents are not public knowledge.
+
+After shuffling a deck, discard 1 card face down from the top of the new deck. This card is not revealed and **CANNOT** be examined.
 
 ### R-2.1.4 Tie-Breaking Procedure
 
@@ -83,7 +87,7 @@ In case of a tie between two or more sides, follow this procedure:
 
 ### R-2.1.5 Probability Curve Awareness
 
-Players **SHOULD** be aware that the card system produces a probability curve for sums from -3 to +7.
+Players **SHOULD** be aware that the card system produces a probability curve for sums from -3 to +7. The probabilities listed are for a full deck which changes as cards are used.
 
 * **Probability of Each Sum:**
 
@@ -387,11 +391,11 @@ Target's attack strength is reduced by 1. Lasts until the start of the target's 
 
 #### R-7.1.3 Hindered
 
-Target's defense is reduced by 1. Lasts until the start of the target's next activation. Stacks.
+Target's attack is reduced by 1. Lasts until the start of the target's next activation. Stacks.
 
 #### R-7.1.4 Damage Over Time
 
-Target suffers 1 wound at the end of its activation. Stacks.
+Target suffers 1 wound at the end of its activation. Stacks don't increase wounds suffered.
 
 #### R-7.1.5 Reduced Defense
 
