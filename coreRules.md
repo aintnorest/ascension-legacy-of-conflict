@@ -4,7 +4,7 @@
 * [2. Resolution Mechanic](#2-resolution-mechanic)
 * [3. Game Flow](#3-game-flow)
 * [4. Model and Terrain Size](#4-model-and-terrain-size)
-* [5. Movement Phase](#5-movement-phase)
+* [5. Movement Action](#5-movement-action)
 * [6. Combat](#6-combat)
 * [7. Special Rules](#7-special-rules)
 * [8. Game Setup](#8-game-setup)
@@ -24,7 +24,7 @@ Players **MUST** provide terrain pieces to create a dynamic battlefield. Terrain
 
 #### R-1.1.3 Measuring Tools
 
-Players **MUST** use a measuring tape or ruler for all distance measurements. Since Strides can be interesting to try and measure as they are mm and most measuring tapes don't use mm as the main increment I recommend brining an extra base of every size your force uses. Using them to measure Strides is much easier.
+Players **SHOULD** have a spare base of every size their force fields to use as a measuring tool. A a measuring tape or ruler works but movement will be done in mm as that is the most common base sizing measurement.
 
 ##### R-1.1.4 Card Deck Composition
 
@@ -53,7 +53,7 @@ If two rules conflict, the more specific rule **ALWAYS** overrides the more gene
 
 ## 2. Resolution Mechanic
 
-**Design Note:** This game uses a card-based resolution mechanic instead of dice to provide a unique probability curve and allow for more strategic play. The card system introduces memory, tension, and the potential for players to track which cards have been played, rewarding skillful planning and risk assessment in a way that dice cannot. It also ensures no one experiences a prolonged bad luck streak, as all cards will eventually be played except for the one card discarded during deck cycling.
+**Design Note:** This game uses a card-based resolution mechanic instead of dice to provide a unique probability curve and allow for more strategic play. The card system introduces memory, tension, and the potential for players to track which cards have been played, rewarding skillful planning and risk assessment in a way that dice cannot.
 
 ### R-2.1.1 Card Value Assignment
 
@@ -242,7 +242,7 @@ Everyone playing a game **MUST** agree on the size of each piece of terrain duri
 
 ---
 
-## 5. Movement Phase
+## 5. Movement Action
 
 ### 5.1 Stride Assignment and Expenditure
 
@@ -329,7 +329,7 @@ Each attack on a model's profile **MUST** include the following:
   * Area: Center point of area template
   * Breakthrough: Any point along the line
   * Ricochet: First target only; subsequent targets measured from previous target
-* **Attack Strength:** Base power of the attack (1–6)
+* **Attack Skill:** Base power of the attack (1–6)
 * **Effects:** Optional modifiers that trigger in one of three ways:
   * Always: Effect happens immediately after damage resolution
   * Match Suit: Effect triggers after damage if the attack effect suite matches either suite of the flipped cards.
@@ -349,7 +349,7 @@ A model is **Engaged** with another model, terrain piece, or scenario feature if
 1. The target is not a friendly model. (Terrain and scenario features are always eligible for engagement unless a rule states otherwise.)
 2. At least one of the following is true:
     * The model is in base-to-base contact with the target.
-    * Any part of the model's **Base Influence** overlaps with any part of the target's base or designated area.
+    * Any part of the model's **Influence** overlaps with any part of the target's base or designated area.
 
 * Engagement status **MAY** affect eligibility for certain actions, modifiers, or effects (for example see [R-6.2.4 GangUp](#r-624-gangup)).
 * Terrain and scenario features **MAY** specify additional effects or restrictions when Engaged; these **MUST** be defined in the scenario or terrain rules.
@@ -360,10 +360,6 @@ A model is **Engaged** with another model, terrain piece, or scenario feature if
 * Partial Cover: +1 to defense roll if terrain Size = Character Size - 1.
 * Full Cover: +2 to defense roll if terrain Size ≤ Character Size - 2.
 * Obscured: No line of sight if terrain Size ≥ Character Size.
-
-#### R-6.2.3 Flanking
-
-If the attacking model is in the target's rear arc (the half of the base opposite the target's front arc), the attacker gains +1 to their attack roll.
 
 #### R-6.2.4 GangUp
 
@@ -379,27 +375,23 @@ If a model attacks from a terrain feature at least two size categories higher th
 
 ### 7.1 Temporary Conditions
 
-The following conditions can be inflicted by attacks and abilities. Each can stack up to 3 times:
+The following conditions can be inflicted by attacks and abilities. Each can stack up to 2 times. All temporary conditions stack the effect strength except Damage Over Time (DOT). Stacks must all be removed before DOT's effect stops:
 
 #### R-7.1.1 Slow
 
-Target loses 1 stride (minimum of 1). Lasts until the start of the target's next activation. Stacks.
+Target loses 1 stride (minimum of 1). Stacks.
 
-#### R-7.1.2 Weak
+#### R-7.1.2 Weakened
 
-Target's attack strength is reduced by 1. Lasts until the start of the target's next activation. Stacks.
+Target's Defense is reduced by 1. Stacks.
 
 #### R-7.1.3 Hindered
 
-Target's attack is reduced by 1. Lasts until the start of the target's next activation. Stacks.
+Target's Attack Skill is reduced by 1. Stacks.
 
 #### R-7.1.4 Damage Over Time
 
 Target suffers 1 wound at the end of its activation. Stacks don't increase wounds suffered.
-
-#### R-7.1.5 Reduced Defense
-
-Target's Defense is reduced by 1. Lasts until the start of the target's next activation. Stacks.
 
 ### 7.2 Terrain and Model Interaction Effects
 
@@ -446,7 +438,7 @@ A model **MAY** target a piece of terrain with an Attack Action, following these
 *Exception:* Some terrain may be marked as indestructible and **CANNOT** be targeted or destroyed by attacks unless a scenario or special rule allows it.
 
 ```markdown
-Example: A Size 2 wall (Defense 2, Wounds 2) is targeted by an attack with Attack Strength 3. The attacker flips cards and adds modifiers, achieving a total of 4. The wall's defense is 2. The attack deals 2 damage (4 - 2 = 2), destroying the wall.
+Example: A Size 2 wall (Defense 2, Wounds 2) is targeted by an attack with Attack Skill 3. The attacker flips cards and adds modifiers, achieving a total of 4. The wall's defense is 2. The attack deals 2 damage (4 - 2 = 2), destroying the wall.
 ```
 
 #### R-7.2.8 Reinforced Terrain
