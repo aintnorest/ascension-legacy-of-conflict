@@ -381,11 +381,11 @@ The following conditions can be inflicted by attacks and abilities. Each can sta
 
 Target loses 1 stride (minimum of 1). Stacks.
 
-#### R-7.1.2 Weakened
+#### R-7.1.2 Weaken
 
 Target's Defense is reduced by 1. Stacks.
 
-#### R-7.1.3 Hindered
+#### R-7.1.3 Hinder
 
 Target's Attack Skill is reduced by 1. Stacks.
 

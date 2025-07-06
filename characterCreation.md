@@ -292,11 +292,14 @@ These abilities generally have a cost of less than 10 points, making them Second
 
 Reaction Actions also count towards the Primary/Secondary Facet ratio (R-1.1.6) based on their cost. Only one reaction may be used per trigger event. Reactions use Exhaust Tokens as other actions (R-3.2.5).
 
-| Reaction                       | Trigger                        | Effect                                 | Cost |
-|:-------------------------------|:-------------------------------|:---------------------------------------|:-----|
-| Negate Displacement (Self)     | When targeted by push or throw | Cannot be pushed or thrown this attack | 12   |
-| Reduce Displacement (Self, 2") | When pushed or knocked back    | Reduce push/knockback distance by 2"   | 8    |
-| Displace Self (Reaction, 1")   | When targeted by an attack     | Move 1" before attack resolves         | 6    |
+| Reaction                       | Trigger                        | Effect                                                   | Cost |
+|:-------------------------------|:-------------------------------|:---------------------------------------------------------|:-----|
+| Negate Displacement (Self)     | When targeted by push or throw | Cannot be pushed or thrown this attack                   | 12   |
+| Reduce Displacement (Self, 2") | When pushed or knocked back    | Reduce push/knockback distance by 2"                     | 8    |
+| Displace Self (Reaction, 1")   | When targeted by an attack     | Move 1" before attack resolves, ^                        | 8    |
+| Increase Defense               | When targeted by an attack     | Draw 3 cards for defense and discard 1 of players choice | 8    |
+
+^ Attack doesn't happen if new position would make target invalid option. Attacker can change targets.
 
 ---
 
@@ -320,20 +323,21 @@ Effects are chosen from the following categories: **Movement Effects**, **Tempor
 
 #### R-5.3 Temporary Effects
 
-| Effect | Description       | Always | Match Suit | Both Suits |
-|:-------|:------------------|:-------|:-----------|:-----------|
-| Hinder | -1 defense        | 5      | 2          | 0          |
-| Slow   | -1 stride (min 1) | 5      | 2          | 0          |
-| Weaken | -1 attack skill   | 5      | 2          | 0          |
+| Effect | Description                        | Always | Match Suit | Both Suits |
+|:-------|:-----------------------------------|:-------|:-----------|:-----------|
+| Hinder | Add 1 Hinder Token to the Defender | 5      | 2          | 0          |
+| Slow   | Add 1 Slow Token to the Defender   | 5      | 2          | 0          |
+| Weaken | Add 1 Weaken Token to the Defender | 5      | 2          | 0          |
 
 Temporary effects last until removed (R-5.2.6 Shake) and may stack up to 3 times on a single target.
 
-#### R-5.4 Damage Effects
+#### R-5.4 Other Effects
 
-| Effect           | Description               | Always | Match Suit | Both Suits |
-|:-----------------|:--------------------------|:-------|:-----------|:-----------|
-| Damage Over Time | 1 wound at activation end | 5      | 3          | 1          |
-| Null Strike      | No damage dealt           | -5     | -          | -          |
+| Effect           | Description                                        | Always | Match Suit | Both Suits |
+|:-----------------|:---------------------------------------------------|:-------|:-----------|:-----------|
+| Damage Over Time | Add 1 Damage Over Time Token to the Defender       | 5      | 3          | 1          |
+| Null Strike      | No damage dealt                                    | -6     | -          | -          |
+| Exhaust          | Add 1 Exhaust Token to 1 of the Defender's Actions | 22     | 11         | -          |
 
 **Null Strike** **CANNOT** be chosen unless at least one **Always** effect is present. **Null Strike** reduces the attack's cost by 3 points and the attack deals no damage but may apply effects.
 
@@ -363,7 +367,8 @@ These abilities generally have a cost of less than 10 points, making them Second
 | Passive Effect                      | Description                                                | Cost |
 |:------------------------------------|:-----------------------------------------------------------|:-----|
 | Attack Bonus vs Large (Size 3+)     | +1 to Attack Skill when targeting models with Size 3+      | 5    |
-| Ignore Climb Penalty                | Ignores extra Stride cost for Climbing (R-5.2.4)           | 4    |
+| Ignore Climb Penalty                | Ignores extra Stride cost for Climbing (R-5.2.4)           | 6    |
+| Ignore Movement Penalties           | Ignores all movement penalties except the Slow condition   | 9    |
 | Defense Bonus vs Ranged             | +2 defense vs ranged attacks                               | 6    |
 | Attack Penalty Aura (2"+Influence)  | -1 to attacks within 2"+influence                          | 5    |
 | Attack Bonus If Stationary          | +2 to attack if no move action this turn                   | 8    |
