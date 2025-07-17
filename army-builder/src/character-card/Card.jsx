@@ -119,7 +119,7 @@ export default function Card({
             <span className="inline-block flex-1">
               <div className="flex flex-col items-center justify-center">
                 <div>🌐</div>
-                <div>{influence}"</div>
+                <div>{influence}&quot;</div>
               </div>
             </span>
             <span className="inline-block flex-1">

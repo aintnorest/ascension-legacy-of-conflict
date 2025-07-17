@@ -8,7 +8,7 @@ export default function SizeView({ mm, size, setSize }) {
     <div className="bg-white rounded-lg p-4 flex flex-col gap-4 text-black">
       <h1 className="text-lg font-semibold">Choose Size</h1>
       <div className="flex flex-col gap-2">
-        Each character MUST be assigned a Size Category before any other choices. Character Size is assigned by the model's base size in mm. Size determines several of a character's base stats.
+        Each character MUST be assigned a Size Category before any other choices. Character Size is assigned by the model&apos;s base size in mm. Size determines several of a character&apos;s base stats.
         <label htmlFor="baseSize" className="font-medium">Model Base Size:</label>
         <div className="flex items-center gap-2">
           <input

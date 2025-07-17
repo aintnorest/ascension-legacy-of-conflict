@@ -104,16 +104,16 @@ export default function Facet ({
           <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">🎬 {name}</div>
           <div className="w-fit whitespace-nowrap">⚔️:{primary ? attackSkill : Math.max(0, attackSkill - 2) }</div>
           {attackModifiers?.type === "singleTarget" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">① | R: {attackModifiers.r}"</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">① | R: {attackModifiers.r}&quot;</div>
           )}
           {attackModifiers?.type === "area" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">⭕ | R: {attackModifiers.r}" | A: {attackModifiers.a}"</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">⭕ | R: {attackModifiers.r}&quot; | A: {attackModifiers.a}&quot;</div>
           )}
           {attackModifiers?.type === "breakthrough" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">📏 | L: {attackModifiers.l}"</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">📏 | L: {attackModifiers.l}&quot;</div>
           )}
           {attackModifiers?.type === "ricochet" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">🔗 | InitR: {attackModifiers.initR}" | T: {attackModifiers.t} | Btwn: {attackModifiers.btwn}"</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">🔗 | InitR: {attackModifiers.initR}&quot; | T: {attackModifiers.t} | Btwn: {attackModifiers.btwn}&quot;</div>
           )}
           {attackEffects?.map((effect, i) => (
             <div className="flex flex-col mb-[0px] w-full leading-[10px]" key={`${effect.type}-${i}`}>{effect.trigger}:{effect.description}</div>

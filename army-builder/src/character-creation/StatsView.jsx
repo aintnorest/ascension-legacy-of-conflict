@@ -221,7 +221,7 @@ export default function StatsView({
     <div className="bg-white rounded-lg p-4 flex flex-col gap-6 text-black">
       <h1 className="text-lg font-semibold">Edit Base Stats</h1>
       <div className="flex flex-col gap-2 text-sm text-gray-600">
-        This section details how to improve a model's fundamental statistics: Wounds, Defense, Attack Skill, and Strides. Points spent here increase the corresponding stat.
+        This section details how to improve a model&apos;s fundamental statistics: Wounds, Defense, Attack Skill, and Strides. Points spent here increase the corresponding stat.
       </div>
       
       {renderStatSection({ ...woundsData, currentValue: pendingWounds }, 'wounds')}
