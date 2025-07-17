@@ -342,17 +342,6 @@ For more information on attack construction and types of effects, see the Charac
 
 ### 6.2 Strategic Placement and Modifiers
 
-#### R-6.2.1 Engagement
-
-A model is **Engaged** with another model, terrain piece, or scenario feature if all of the following conditions are met:
-
-1. The target is not a friendly model. (Terrain and scenario features are always eligible for engagement unless a rule states otherwise.)
-2. At least one of the following is true:
-    * The model is in base-to-base contact with the target.
-    * Any part of the model's **Influence** overlaps with any part of the target's base or designated area.
-
-* Engagement status **MAY** affect eligibility for certain actions, modifiers, or effects (for example see [R-6.2.4 GangUp](#r-624-gangup)).
-* Terrain and scenario features **MAY** specify additional effects or restrictions when Engaged; these **MUST** be defined in the scenario or terrain rules.
 
 #### R-6.2.2 Cover
 
@@ -360,14 +349,6 @@ A model is **Engaged** with another model, terrain piece, or scenario feature if
 * Partial Cover: +1 to defense roll if terrain Size = Character Size - 1.
 * Full Cover: +2 to defense roll if terrain Size ≤ Character Size - 2.
 * Obscured: No line of sight if terrain Size ≥ Character Size.
-
-#### R-6.2.4 GangUp
-
-If a target is engaged by two or more enemy models, attackers gain +1 to their attack roll per additional model (max +3).
-
-#### R-6.2.5 High Ground
-
-If a model attacks from a terrain feature at least two size categories higher than the target, it gains +1 to its attack roll.
 
 ---
 
@@ -454,7 +435,7 @@ Example: A Size 2 wall (Defense 2, Wounds 2) is targeted by an attack with Attac
 
 #### R-7.2.10 Influence
 
-Influence is determined by Size Category and is the area around the models base that they can influence. Influence is important for [Engagement Rules](#r-621-engagement) and scenario play.
+Influence is determined by Size Category and is the area around the models base that they can influence. Influence is important for scenario play.
 
 #### R-7.2.11 Multilevel Terrain and Elevation
 

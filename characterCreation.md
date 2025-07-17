@@ -72,7 +72,7 @@ To condense character profiles for easier reference, the following symbols are u
 
 ### R-1.1.4 Total Character Profile Limit
 
-The total number of Facets on a model's profile, which includes purchased Attack Actions, Ability Actions, Reaction Actions, and Passive Abilities, **MUST NOT** exceed 8.
+The total number of Facets on a model's profile, which includes purchased Attack Actions, Ability Actions, Reaction Actions, and Passive Abilities, **MUST NOT** exceed 7.
 
 ### R-1.1.5 Minimum Action Diversity Requirement
 
@@ -303,9 +303,9 @@ Reaction Actions also count towards the Primary/Secondary Facet ratio (R-1.1.6) 
 
 ---
 
-## 5. Attack and Ability Effects
+## 5. Attack Effects
 
-Effects define the additional impact of an attack or an ability. When purchasing an effect, the player **MUST** choose its trigger condition: **Always**, **Match Suit**, or **Both Suits**. Each trigger condition has its own point cost. Unless an effect explicitly states otherwise, each effect **MAY** only be applied to the same action once.
+Effects define the additional impact of an attack. When purchasing an effect, the player **MUST** choose its trigger condition: **Always**, **Match Suit**, or **Both Suits**. Each trigger condition has its own point cost. Unless an effect explicitly states otherwise, each effect **MAY** only be applied to the same action once.
 
 ### R-5.1 Effect Categories
 
@@ -313,33 +313,64 @@ Effects are chosen from the following categories: **Movement Effects**, **Tempor
 
 #### R-5.2 Movement Effects
 
-| Effect            | Description                                | Always | Match Suit | Both Suits |
-|:------------------|:-------------------------------------------|:-------|:-----------|:-----------|
-| Displace Attacker | Move attacker within 1" of target          | 6      | 4          | 1          |
-| Displace Defender | Move target within 1" of original position | 5      | 3          | 0          |
-| Knockback         | Push target 1" directly away               | 4      | 2          | 0          |
-| Throw             | Throw target if 2 sizes smaller            | 8      | 5          | 2          |
-| Throw Terrain     | Throw terrain if 2 sizes smaller           | 6      | 4          | 1          |
+| Effect            | Description                                | 🃏✔️ | 🃏✖️ | 🃏✔️✖️ | ♣️✔️ | ♣️✖️ | ♣️✔️✖️ | ♣️♦️✔️ | ♣️♦️✖️ | ♣️♦️✔️✖️ | ♣️♣️✔️ | ♣️♣️✖️ | ♣️♣️✔️✖️ |
+|:------------------|:-------------------------------------------|:-----|:-----|:-------|:-----|:-----|:-------|:-------|:-------|:----------|:-------|:-------|:----------|
+| Displace Attacker | Move attacker within 1" of target          | 6    | 7    | 8      | 4    | 5    | 6      | 2      | 3      | 4         | 1      | 2      | 3         |
+| Displace Defender | Move target within 1" of original position | 5    | 6    | 7      | 3    | 4    | 5      | 1      | 2      | 3         | 0      | 1      | 2         |
+| Knockback         | Push target 1" directly away               | 4    | 5    | 6      | 2    | 3    | 4      | 1      | 2      | 3         | 0      | 1      | 2         |
+| Throw             | Throw target if 2 sizes smaller            | 8    | 9    | 10     | 5    | 6    | 7      | 3      | 4      | 5         | 2      | 3      | 4         |
+| Throw Terrain     | Throw terrain if 2 sizes smaller           | 6    | 7    | 8      | 4    | 5    | 6      | 2      | 3      | 4         | 1      | 2      | 3         |
 
 #### R-5.3 Temporary Effects
 
-| Effect | Description                        | Always | Match Suit | Both Suits |
-|:-------|:-----------------------------------|:-------|:-----------|:-----------|
-| Hinder | Add 1 Hinder Token to the Defender | 5      | 2          | 0          |
-| Slow   | Add 1 Slow Token to the Defender   | 5      | 2          | 0          |
-| Weaken | Add 1 Weaken Token to the Defender | 5      | 2          | 0          |
+| Effect | Description                        | 🃏✔️ | 🃏✖️ | 🃏✔️✖️ | ♣️✔️ | ♣️✖️ | ♣️✔️✖️ | ♣️♦️✔️ | ♣️♦️✖️ | ♣️♦️✔️✖️ | ♣️♣️✔️ | ♣️♣️✖️ | ♣️♣️✔️✖️ |
+|:-------|:-----------------------------------|:-----|:-----|:-------|:-----|:-----|:-------|:-------|:-------|:----------|:-------|:-------|:----------|
+| Hinder | Add 1 Hinder Token to the Defender | 5    | 6    | 7      | 2    | 3    | 4      | 1      | 2      | 3         | 0      | 1      | 2         |
+| Slow   | Add 1 Slow Token to the Defender   | 5    | 6    | 7      | 2    | 3    | 4      | 1      | 2      | 3         | 0      | 1      | 2         |
+| Weaken | Add 1 Weaken Token to the Defender | 5    | 6    | 7      | 2    | 3    | 4      | 1      | 2      | 3         | 0      | 1      | 2         |
 
 Temporary effects last until removed (R-5.2.6 Shake) and may stack up to 3 times on a single target.
 
 #### R-5.4 Other Effects
 
-| Effect           | Description                                        | Always | Match Suit | Both Suits |
-|:-----------------|:---------------------------------------------------|:-------|:-----------|:-----------|
-| Damage Over Time | Add 1 Damage Over Time Token to the Defender       | 5      | 3          | 1          |
-| Null Strike      | No damage dealt                                    | -6     | -          | -          |
-| Exhaust          | Add 1 Exhaust Token to 1 of the Defender's Actions | 22     | 11         | -          |
+| Effect           | Description                                        | 🃏✔️ | 🃏✖️ | 🃏✔️✖️ | ♣️✔️ | ♣️✖️ | ♣️✔️✖️ | ♣️♦️✔️ | ♣️♦️✖️ | ♣️♦️✔️✖️ | ♣️♣️✔️ | ♣️♣️✖️ | ♣️♣️✔️✖️ |
+|:-----------------|:---------------------------------------------------|:-----|:-----|:-------|:-----|:-----|:-------|:-------|:-------|:----------|:-------|:-------|:----------|
+| Damage Over Time | Add 1 Damage Over Time Token to the Defender       | 5    | 6    | 7      | 3    | 4    | 5      | 2      | 3      | 4         | 1      | 2      | 3         |
+| Null Strike      | No damage dealt                                    | -6   | -5   | -4     | -     | -    | -      | -      | -      | -         | -      | -      | -         |
+| Exhaust          | Add 1 Exhaust Token to 1 of the Defender's Actions | 22   | 25   | 28     | 11   | 14   | 17     | 8      | 11     | 14        | -      | -      | -         |
 
 **Null Strike** **CANNOT** be chosen unless at least one **Always** effect is present. **Null Strike** reduces the attack's cost by 3 points and the attack deals no damage but may apply effects.
+
+### R-5.5 Effect Timing and Activation Requirements
+
+When purchasing effects for attacks, two independent factors determine when the effect activates:
+
+#### R-5.5.1 Effect Timing (When It Triggers)
+
+Use the following symbols in the stat block to indicate when an effect applies:
+
+* **✔️ (On Hit):** Effect applies only if the attack is successful.
+* **✖️ (On Miss):** Effect applies only if the attack fails.
+* **✔️✖️ (On Hit or Miss):** Effect applies regardless of whether the attack hits or misses.
+
+*If no timing symbol is specified, the effect defaults to **On Hit** (✔️).*
+
+#### R-5.5.2 Suit Dependency (Card Requirements)
+
+Each effect's activation also depends on the suits of the two cards flipped for the attack:
+
+* **🃏 (Always):** Effect activates regardless of the suits flipped.
+* **♣️ (Match Suit - Clubs):** Effect activates only if at least one Club is flipped.
+* **♣️♦️ (Match Suit - Club & Diamond):** Effect activates only if one Club and one Diamond are flipped.
+* **♣️♣️ (Both Suits - Two Clubs):** Effect activates only if both cards flipped are Clubs.
+
+#### R-5.5.3 Recording Effect Requirements
+
+When recording an attack with effects on a character sheet, both the timing and suit dependency **MUST** be clearly indicated. Examples:
+
+* **🃏✔️: Hinder** - Always triggers on hit
+* **♣️✔️✖️: Knockback** - Triggers on Club match, on hit or miss
+* **♣️♣️✖️: Throw** - Triggers on two Clubs, only on miss
 
 ---
 
@@ -429,7 +460,7 @@ Example Character Sheet
 
 Model Name: Iron Warden (Cost For Complete Character 73 points)
 Size Category: 2 (50mm)
-Base Stats: 👟2, ❤️1, 🌐1", ⚔️0, 🛡️4 (cost 10)
+Base Stats: 👟2, ❤️1, 🌐1", ⚔️0, 🛡️4, 📐2 (50mm) (cost 10)
 
 Facets (Total: 5/8)
 
@@ -444,7 +475,7 @@ Facets (Total: 5/8)
     * ① | R:0" (Free)
     * 🃏: Hinder (cost 5)
 
-  Evasion (🔸, cost 6)
+  Evasion (🔸, cost 6)⤉⬆︎↑
     * Description: +2 defense vs ranged attacks
 
   Side Step (🔸, cost 6)

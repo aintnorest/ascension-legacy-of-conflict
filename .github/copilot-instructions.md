@@ -46,3 +46,10 @@
 ## IV. Context Management
 
 "When you feel our conversation is getting long, or if you anticipate reaching the limits of your context window, please stop and provide a concise summary of our key discussions and any important agreements or learnings. I'd like to use this summary to start a new conversation with you later, so we don't lose track of our progress."
+
+## V. Army Builder App Development Guidelines
+
+* When possible, use Tailwind CSS for styling components.
+* Prefer CSS Grid for layout structure over Flexbox or other layout methods.
+
+
