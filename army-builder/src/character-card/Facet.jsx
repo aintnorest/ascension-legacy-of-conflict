@@ -1,12 +1,19 @@
 import React from "react";
+import {
+  ACTION_SYMBOLS,
+  ATTACK_MODIFIER_SYMBOLS,
+  ATTACK_TEMPLATE_SYMBOLS,
+  GAME_SYMBOLS,
+  STATS_SYMBOLS,
+} from '@/rules/symbols';
 
 /*
 **Attack Templates:**
 
-* **①:** Single Target
-* **⭕:** Area
-* **📏:** Breakthrough
-* **🔗:** Ricochet
+* **{ATTACK_TEMPLATE_SYMBOLS.SINGLE_TARGET}:** Single Target
+* **{ATTACK_TEMPLATE_SYMBOLS.AREA}:** Area
+* **{ATTACK_TEMPLATE_SYMBOLS.BREAKTHROUGH}:** Breakthrough
+* **{ATTACK_TEMPLATE_SYMBOLS.RICOCHET}:** Ricochet
 
 **Attack Modifiers:**
 
@@ -19,22 +26,22 @@ import React from "react";
 
 **Suit Dependencies:**
 
-* **♠️:** Spades
-* **♥️:** Hearts
-* **♦️:** Diamonds
-* **♣️:** Clubs
-* **🃏:** Always
+* **{SUIT_SYMBOLS.SPADES}:** Spades
+* **{SUIT_SYMBOLS.HEARTS}:** Hearts
+* **{SUIT_SYMBOLS.DIAMONDS}:** Diamonds
+* **{SUIT_SYMBOLS.CLUBS}:** Clubs
+* **{SUIT_SYMBOLS.JOKER}:** Always
 
   Arc Burst (🔷, cost 17, total 29)
-    * ⚔️ 0
-    * ⭕ | R:2" (cost 4) | A:2" (cost 5)
-    * 🃏: Hinder (cost 5)
-    * ♻️x2 (cost -2)
+    * {STATS_SYMBOLS.ATTACK_SKILL} 0
+    * {ATTACK_TEMPLATE_SYMBOLS.AREA} | R:2" (cost 4) | A:2" (cost 5)
+    * {SUIT_SYMBOLS.JOKER}: Hinder (cost 5)
+    * {GAME_SYMBOLS.EXHAUSTION}x2 (cost -2)
 
   Hammer Blow (🔸, cost 5, total 10)
-    * ⚔️ 0
-    * ① | R:0" (Free)
-    * 🃏: Hinder (cost 5)
+    * {STATS_SYMBOLS.ATTACK_SKILL} 0
+    * {ATTACK_TEMPLATE_SYMBOLS.SINGLE_TARGET} | R:0" (Free)
+    * {SUIT_SYMBOLS.JOKER}: Hinder (cost 5)
     * 
 */
 
@@ -89,31 +96,31 @@ export default function Facet ({
       {(type === "action" || type === "reaction") && (
         <div id="exhaustedSlot" className={classNames.exhaustedSlot}>
           <div className={classNames.coreUsageSquares}>
-          💤
+          {GAME_SYMBOLS.EXHAUSTION_SLOT}
             <span className="absolute top-0 right-0 top-[-3px] text-[16px]">
-              {exhaust ?  "♻️" : ""}
+              {exhaust ? GAME_SYMBOLS.EXHAUSTION : ""}
             </span>
             <span className="absolute left-0 bottom-[-3] text-[16px]">
-              {exhaust ?  "♻️" : ""}
+              {exhaust ? GAME_SYMBOLS.EXHAUSTION : ""}
             </span>
           </div>
         </div>
       )}
       { subType === "attack" && (
         <div id="content" className="h-[0.75in] w-fit flex flex-wrap items-start gap-0">
-          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">🎬 {name}</div>
-          <div className="w-fit whitespace-nowrap">⚔️:{primary ? attackSkill : Math.max(0, attackSkill - 2) }</div>
+          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">{ACTION_SYMBOLS.ACTION} {name}</div>
+          <div className="w-fit whitespace-nowrap">{STATS_SYMBOLS.ATTACK_SKILL}:{primary ? attackSkill : Math.max(0, attackSkill - 2) }</div>
           {attackModifiers?.type === "singleTarget" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">① | R: {attackModifiers.r}&quot;</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.SINGLE_TARGET} | {ATTACK_MODIFIER_SYMBOLS.RANGE}: {attackModifiers.r}&quot;</div>
           )}
           {attackModifiers?.type === "area" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">⭕ | R: {attackModifiers.r}&quot; | A: {attackModifiers.a}&quot;</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.AREA} | {ATTACK_MODIFIER_SYMBOLS.RANGE}: {attackModifiers.r}&quot; | {ATTACK_MODIFIER_SYMBOLS.AREA}: {attackModifiers.a}&quot;</div>
           )}
           {attackModifiers?.type === "breakthrough" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">📏 | L: {attackModifiers.l}&quot;</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.BREAKTHROUGH} | {ATTACK_MODIFIER_SYMBOLS.LINE}: {attackModifiers.l}&quot;</div>
           )}
           {attackModifiers?.type === "ricochet" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">🔗 | InitR: {attackModifiers.initR}&quot; | T: {attackModifiers.t} | Btwn: {attackModifiers.btwn}&quot;</div>
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.RICOCHET} | {ATTACK_MODIFIER_SYMBOLS.INITIAL_RANGE}: {attackModifiers.initR}&quot; | {ATTACK_MODIFIER_SYMBOLS.TARGETS}: {attackModifiers.t} | {ATTACK_MODIFIER_SYMBOLS.BETWEEN}: {attackModifiers.btwn}&quot;</div>
           )}
           {attackEffects?.map((effect, i) => (
             <div className="flex flex-col mb-[0px] w-full leading-[10px]" key={`${effect.type}-${i}`}>{effect.trigger}:{effect.description}</div>
@@ -121,20 +128,24 @@ export default function Facet ({
         </div>
       )}
       { subType === "reaction" && (
-        <div id="content" className="h-[0.75in] w-fit flex flex-wrap items-start gap-0">
-          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">↩️ {name}</div>
-          <div className="text-[8px] text-gray-600 w-full mb-[1px]">
-            <strong>Trigger:</strong> {trigger}
+        <div id="content" className="h-[0.75in] w-fit flex flex-col flex-wrap items-start gap-0">
+          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[3px] mr-[4px]">{ACTION_SYMBOLS.REACTION} {name}</div>
+          <div className="flex flex-row mb-[0px] w-fit leading-[10px]">
+            <strong className="mr-1">Trigger:</strong>
+            {trigger}
           </div>
-          <div className="text-[8px] text-gray-600 w-full leading-[10px]">{description}</div>
+          <div className="flex flex-col mb-[0px] w-fit leading-[10px]">
+            <strong className="mr-1">Description:</strong>
+            {description}
+          </div>
         </div>
       )}
-      {(type === "instant" || type === "passive" || type === "reaction") && (
+      {(type === "instant" || type === "passive") && (
         <div>
           <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">
-          {type === "instant" && "⚡️ "}
-          {type === "passive" && "∞ "}
-          {type === "reaction" && "↩️ "}
+          {type === "instant" && `${ACTION_SYMBOLS.INSTANT} `}
+          {type === "passive" && `${ACTION_SYMBOLS.PASSIVE} `}
+          {type === "reaction" && `${ACTION_SYMBOLS.REACTION} `}
           {name}
         </div>
           <div> {description}</div>

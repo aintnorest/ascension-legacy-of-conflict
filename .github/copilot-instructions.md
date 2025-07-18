@@ -47,9 +47,64 @@
 
 "When you feel our conversation is getting long, or if you anticipate reaching the limits of your context window, please stop and provide a concise summary of our key discussions and any important agreements or learnings. I'd like to use this summary to start a new conversation with you later, so we don't lose track of our progress."
 
-## V. Army Builder App Development Guidelines
+## V. army-builder App Architecture and Code Generation Guidelines
 
-* When possible, use Tailwind CSS for styling components.
-* Prefer CSS Grid for layout structure over Flexbox or other layout methods.
+This document outlines the architectural principles and code organization rules for this Next.js web application. GitHub Copilot must adhere to these guidelines during code generation to ensure consistency, maintainability, and proper separation of concerns.
+
+---
+
+### Component Responsibilities (UI Focus)
+
+* **Rule:** React components (`.jsx`) generated MUST be solely concerned with User Interface (UI) rendering.
+* **Directive:** Avoid embedding complex business logic, game rules, or heavy data manipulation directly within component files. Components should primarily handle state related to UI interaction, props passing, and rendering.
+
+---
+
+### Logic and Rule Separation
+
+* **Rule:** All core game rules, complex calculations, and specific game-state logic (e.g., character attribute calculations, army list validation, turn phase logic) MUST be abstracted into dedicated helper files.
+* **Directive:** Never generate game rules or complex calculation functions directly inside React components or API routes unless explicitly instructed for a minimal, single-use case.
+
+---
+
+### Dedicated `rules` Folder
+
+* **Rule:** All files containing core game rules, game logic, or related calculation functions MUST reside within the `/army-builder/src/rules` directory.
+* **Directive:** When generating new game logic or rule-related code, always propose placing it in `/army-builder/src/rules/` (e.g., `/army-builder/src/rules/characterValidation.js`, `/army-builder/src/rules/abilityCalculations.ts`).
+
+---
+
+### Utility File Organization
+
+* **Rule:** Utility functions are categorized based on their reusability.
+* **Sub-Rule A: Shared Utilities:**
+    * **Rule:** Generic utility functions that are reusable across multiple components, pages, or sections of the application (e.g., date formatters, general data manipulation, common API request helpers) SHOULD be placed in the `/army-builder/src/sharedUtilities` directory.
+    * **Directive:** When generating broadly reusable utility functions, propose placing them in `/army-builder/src/sharedUtilities/`.
+* **Sub-Rule B: Component-Specific Utilities:**
+    * **Rule:** Utility functions that are tightly coupled to a single component or a very specific use case within one component, and are unlikely to be reused elsewhere, MAY reside in the same directory as that component.
+    * **Directive:** Only place utility functions alongside a component if they are clearly exclusive to that component's functionality.
+
+---
+
+### Styling with Tailwind CSS
+
+* **Rule:** All UI styling across the application MUST primarily use Tailwind CSS utility classes.
+* **Directive:** When generating or modifying components, always prefer Tailwind CSS classes for styling. Avoid writing custom CSS (e.g., in separate `.css` modules or inline style objects) unless there is an absolute necessity that cannot be achieved with Tailwind's utility classes or custom configurations.
+* **Note to Copilot:** Remember that the project uses custom font configurations for game text and may utilize arbitrary values for precise sizing (e.g., `text-[7pt]`).
+
+---
+
+### Testing Guidelines
+
+* **Rule:** When creating or updating tests, you MUST NOT mock any modules or functions imported from the `/army-builder/src/rules` folder.
+* **Directive:** Assume that code within `/army-builder/src/rules` represents core, critical game logic that needs to be tested against its actual implementation to ensure correctness and prevent abstracting away potential bugs. Focus on testing the inputs and outputs of these rule functions directly.
+
+---
+
+### Game Symbology and Iconography
+
+* **Rule:** All game-specific symbology, iconography, or path references to symbol assets (e.g., attack symbols, defense symbols, special ability icons, status effect markers) MUST be centrally defined and exported from the file located at `/army-builder/src/rules/symbols.js`.
+* **Directive:** When a component or any other part of the application needs to display game-specific symbols or icons, always import and reference them from `src/rules/symbols.js`. Do not hardcode image paths or symbol definitions directly within components or other files. This ensures that all symbology can be easily changed or updated from a single source.
+
 
 

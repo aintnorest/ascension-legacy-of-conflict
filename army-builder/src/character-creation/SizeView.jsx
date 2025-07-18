@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BASE_STATS_TABLE } from "@/rulesLogic";
+import { STATS_SYMBOLS } from "@/rules/symbols";
 
 export default function SizeView({ mm, size, setSize }) {
   const [baseSizeInput, setBaseSizeInput] = useState(mm ?? "");
@@ -57,11 +58,11 @@ export default function SizeView({ mm, size, setSize }) {
           <thead>
             <tr className="bg-gray-100">
               <th className="px-2 py-1 border-b border-gray-300 text-left">Size</th>
-              <th className="px-2 py-1 border-b border-gray-300 text-left">👟 Strides</th>
-              <th className="px-2 py-1 border-b border-gray-300 text-left">❤️ Wounds</th>
-              <th className="px-2 py-1 border-b border-gray-300 text-left">🌐 Influence</th>
-              <th className="px-2 py-1 border-b border-gray-300 text-left">⚔️ Attack Skill</th>
-              <th className="px-2 py-1 border-b border-gray-300 text-left">🛡️ Defense</th>
+              <th className="px-2 py-1 border-b border-gray-300 text-left">{STATS_SYMBOLS.STRIDES} Strides</th>
+              <th className="px-2 py-1 border-b border-gray-300 text-left">{STATS_SYMBOLS.WOUNDS} Wounds</th>
+              <th className="px-2 py-1 border-b border-gray-300 text-left">{STATS_SYMBOLS.INFLUENCE} Influence</th>
+              <th className="px-2 py-1 border-b border-gray-300 text-left">{STATS_SYMBOLS.ATTACK_SKILL} Attack Skill</th>
+              <th className="px-2 py-1 border-b border-gray-300 text-left">{STATS_SYMBOLS.DEFENSE} Defense</th>
             </tr>
           </thead>
           <tbody>

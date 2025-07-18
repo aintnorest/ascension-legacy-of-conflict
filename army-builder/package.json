@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "docs:generate": "node scripts/generate-docs-runner.js"
   },
   "dependencies": {
     "next": "15.3.5",

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ATTACK_TEMPLATES, ATTACK_EFFECTS, SUIT_DEPENDENCIES, EFFECT_TIMING, GENERAL_ACTION_RULES, ATTACK_ACTION_RULES } from "@/rulesLogic";
+import { SUIT_SYMBOLS } from "@/rules/symbols";
 
 export default function AttackActionFacetView({
   attackSkill,
@@ -100,7 +101,7 @@ export default function AttackActionFacetView({
       cost: cost,
       categoryKey,
       effectKey,
-      suit: suit || "🃏",
+      suit: suit || SUIT_SYMBOLS.JOKER,
       timing: timing || "✔️"
     };
     
@@ -407,7 +408,7 @@ export default function AttackActionFacetView({
                         key={triggerKey}
                         onClick={() => addEffect(categoryKey, effectKey, triggerKey, cost)}
                         className="p-1 bg-blue-100 hover:bg-blue-200 border border-blue-300 rounded text-center"
-                        disabled={cost < 0 && !selectedEffects.some(e => e.suit === "🃏")}
+                        disabled={cost < 0 && !selectedEffects.some(e => e.suit === SUIT_SYMBOLS.JOKER)}
                       >
                         {triggerKey}: {cost} pts
                       </button>

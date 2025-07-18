@@ -1,6 +1,7 @@
 import React from "react";
 import Facet from './Facet';
 import css from './card.module.css';
+import { STATS_SYMBOLS, GAME_SYMBOLS } from '@/rules/symbols';
 
 const classNames = {
   characterCard: "w-[4in] max-h-[6in] box-border border-2 border-[#222] rounded-lg p-[0.15in] bg-[#faf9f6] font-['Roboto_Condensed',Arial,Helvetica,sans-serif] text-[10px] text-black flex flex-col",
@@ -21,8 +22,8 @@ const classNames = {
 * **Btwn:** Range Between Targets (e.g., Btwn:2" for 2 inches between targets)
 * **InitR:** Initial Range (for Ricochet, e.g., InitR:4")
 
-🎬 Actions or ↩️ ReActions
-⚡️ Instants
+{ACTION_SYMBOLS.ACTION} Actions or {ACTION_SYMBOLS.REACTION} ReActions
+{ACTION_SYMBOLS.INSTANT} Instants
 ∞ Constants
 */
 // const items = [
@@ -118,13 +119,13 @@ export default function Card({
             </span>
             <span className="inline-block flex-1">
               <div className="flex flex-col items-center justify-center">
-                <div>🌐</div>
+                <div>{STATS_SYMBOLS.INFLUENCE}</div>
                 <div>{influence}&quot;</div>
               </div>
             </span>
             <span className="inline-block flex-1">
               <div className="flex flex-col items-center justify-center">
-                <div>🛡️</div>
+                <div>{STATS_SYMBOLS.DEFENSE}</div>
                 <div>{defense}</div>
               </div>
             </span>
@@ -132,9 +133,9 @@ export default function Card({
         </div>
         <div id="coreUsage" className={classNames.coreUsage}>
           <div className={classNames.coreUsageSquares}>
-          👟
+          {STATS_SYMBOLS.STRIDES}
           <span className="absolute top-0 left-0 top-[-3px] text-[16px]">
-            💤
+            {GAME_SYMBOLS.EXHAUSTION_SLOT}
           </span>
           <span className="absolute top-0 right-0 top-[-3px] text-[16px]">
             {strides}
@@ -144,7 +145,7 @@ export default function Card({
           </span>
         </div>
           <div className={classNames.coreUsageSquares}>
-            ❤️
+            {STATS_SYMBOLS.WOUNDS}
             <span className="absolute right-0 top-[-3px] text-[16px]">
               {wounds}
             </span>
