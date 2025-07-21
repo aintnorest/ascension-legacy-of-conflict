@@ -414,9 +414,6 @@ export default function AttackActionFacetView({
                       </button>
                     ))}
                   </div>
-                  {effect.restriction && (
-                    <div className="text-xs text-red-600 mt-1">{effect.restriction}</div>
-                  )}
                 </div>
               ))}
             </div>

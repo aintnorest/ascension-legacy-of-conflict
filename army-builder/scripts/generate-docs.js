@@ -9,8 +9,47 @@ const importESM = async (modulePath) => {
   return await import(fullPath);
 };
 
+const generateMarkdownTable = (tableDefinition, level = 3) => {
+  const { title, description, headers, computeRows } = tableDefinition;
+  
+  let markdown = '';
+  
+  if (title) {
+    markdown += `${'#'.repeat(level)} ${title}\n\n`;
+  }
+  
+  if (description) {
+    markdown += `${description}\n\n`;
+  }
+  
+  // Generate rows from computeRows function
+  const rows = computeRows ? computeRows() : [];
+  
+  if (headers && headers.length > 0 && rows.length > 0) {
+    // Create header row
+    markdown += `| ${headers.join(' | ')} |\n`;
+    
+    // Create separator row
+    markdown += `| ${headers.map(() => '---').join(' | ')} |\n`;
+    
+    // Create data rows
+    rows.forEach(row => {
+      markdown += `| ${row.join(' | ')} |\n`;
+    });
+    
+    markdown += '\n';
+  }
+  
+  return markdown;
+};
+
 const generateMarkdownForRule = (rule, level = 1) => {
   let markdown = '';
+
+  // Handle table types
+  if (rule.type === 'table') {
+    return generateMarkdownTable(rule, level);
+  }
 
   if (rule.name) {
     markdown += `${'#'.repeat(level)} ${rule.name}\n\n`;

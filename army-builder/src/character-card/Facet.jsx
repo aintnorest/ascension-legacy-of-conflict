@@ -42,14 +42,14 @@ import {
     * {STATS_SYMBOLS.ATTACK_SKILL} 0
     * {ATTACK_TEMPLATE_SYMBOLS.SINGLE_TARGET} | R:0" (Free)
     * {SUIT_SYMBOLS.JOKER}: Hinder (cost 5)
-    * 
+    *
 */
 
 const classNames = {
-  exhaustedSlot: "relative w-[0.75in] h-[0.75in] aspect-square border-2 border-[#999] rounded bg-white flex items-center justify-center text-[34px]",
+  exhaustedSlot: `relative w-[0.75in] h-[0.75in] aspect-square border-2 border-[#999] rounded bg-white flex items-center justify-center text-[34px]`,
 };
 
-export default function Facet ({
+export default function Facet({
   attackEffects,
   attackModifiers,
   attackSkill,
@@ -78,9 +78,9 @@ export default function Facet ({
   };
 
   return (
-    <div 
-      className={`${(type === "action" || type === "reaction") ? "h-[0.75in]" : ""} flex-shrink-0 flex flex-row items-center gap-2 relative group ${
-        edit ? "cursor-pointer hover:bg-blue-50 hover:border-blue-300 border border-transparent rounded p-1" : ""
+    <div
+      className={`${(type === `action` || type === `reaction`) ? `h-[0.75in]` : ``} flex-shrink-0 flex flex-row items-center gap-2 relative group ${
+        edit ? `cursor-pointer hover:bg-blue-50 hover:border-blue-300 border border-transparent rounded p-1` : ``
       }`}
       onClick={handleClick}
     >
@@ -93,43 +93,118 @@ export default function Facet ({
           🗑️
         </button>
       )}
-      {(type === "action" || type === "reaction") && (
+      {(type === `action` || type === `reaction`) && (
         <div id="exhaustedSlot" className={classNames.exhaustedSlot}>
           <div className={classNames.coreUsageSquares}>
-          {GAME_SYMBOLS.EXHAUSTION_SLOT}
+            {GAME_SYMBOLS.EXHAUSTION_SLOT}
             <span className="absolute top-0 right-0 top-[-3px] text-[16px]">
-              {exhaust ? GAME_SYMBOLS.EXHAUSTION : ""}
+              {exhaust ? GAME_SYMBOLS.EXHAUSTION : ``}
             </span>
             <span className="absolute left-0 bottom-[-3] text-[16px]">
-              {exhaust ? GAME_SYMBOLS.EXHAUSTION : ""}
+              {exhaust ? GAME_SYMBOLS.EXHAUSTION : ``}
             </span>
           </div>
         </div>
       )}
-      { subType === "attack" && (
+      { subType === `attack` && (
         <div id="content" className="h-[0.75in] w-fit flex flex-wrap items-start gap-0">
-          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">{ACTION_SYMBOLS.ACTION} {name}</div>
-          <div className="w-fit whitespace-nowrap">{STATS_SYMBOLS.ATTACK_SKILL}:{primary ? attackSkill : Math.max(0, attackSkill - 2) }</div>
-          {attackModifiers?.type === "singleTarget" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.SINGLE_TARGET} | {ATTACK_MODIFIER_SYMBOLS.RANGE}: {attackModifiers.r}&quot;</div>
+          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">
+            {ACTION_SYMBOLS.ACTION}
+            {` `}
+            {name}
+          </div>
+          <div className="w-fit whitespace-nowrap">
+            {STATS_SYMBOLS.ATTACK_SKILL}
+            :
+            {primary ? attackSkill : Math.max(0, attackSkill - 2) }
+          </div>
+          {attackModifiers?.type === `singleTarget` && (
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">
+              {ATTACK_TEMPLATE_SYMBOLS.SINGLE_TARGET}
+              {` `}
+              |
+              {` `}
+              {ATTACK_MODIFIER_SYMBOLS.RANGE}
+              :
+              {` `}
+              {attackModifiers.r}
+              &quot;
+            </div>
           )}
-          {attackModifiers?.type === "area" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.AREA} | {ATTACK_MODIFIER_SYMBOLS.RANGE}: {attackModifiers.r}&quot; | {ATTACK_MODIFIER_SYMBOLS.AREA}: {attackModifiers.a}&quot;</div>
+          {attackModifiers?.type === `area` && (
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">
+              {ATTACK_TEMPLATE_SYMBOLS.AREA}
+              {` `}
+              |
+              {` `}
+              {ATTACK_MODIFIER_SYMBOLS.RANGE}
+              :
+              {` `}
+              {attackModifiers.r}
+              &quot; |
+              {` `}
+              {ATTACK_MODIFIER_SYMBOLS.AREA}
+              :
+              {` `}
+              {attackModifiers.a}
+              &quot;
+            </div>
           )}
-          {attackModifiers?.type === "breakthrough" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.BREAKTHROUGH} | {ATTACK_MODIFIER_SYMBOLS.LINE}: {attackModifiers.l}&quot;</div>
+          {attackModifiers?.type === `breakthrough` && (
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">
+              {ATTACK_TEMPLATE_SYMBOLS.BREAKTHROUGH}
+              {` `}
+              |
+              {` `}
+              {ATTACK_MODIFIER_SYMBOLS.LINE}
+              :
+              {` `}
+              {attackModifiers.l}
+              &quot;
+            </div>
           )}
-          {attackModifiers?.type === "ricochet" && (
-            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">{ATTACK_TEMPLATE_SYMBOLS.RICOCHET} | {ATTACK_MODIFIER_SYMBOLS.INITIAL_RANGE}: {attackModifiers.initR}&quot; | {ATTACK_MODIFIER_SYMBOLS.TARGETS}: {attackModifiers.t} | {ATTACK_MODIFIER_SYMBOLS.BETWEEN}: {attackModifiers.btwn}&quot;</div>
+          {attackModifiers?.type === `ricochet` && (
+            <div className="w-fit whitespace-nowrap mb-[1px] pl-[2px]">
+              {ATTACK_TEMPLATE_SYMBOLS.RICOCHET}
+              {` `}
+              |
+              {` `}
+              {ATTACK_MODIFIER_SYMBOLS.INITIAL_RANGE}
+              :
+              {` `}
+              {attackModifiers.initR}
+              &quot; |
+              {` `}
+              {ATTACK_MODIFIER_SYMBOLS.TARGETS}
+              :
+              {` `}
+              {attackModifiers.t}
+              {` `}
+              |
+              {` `}
+              {ATTACK_MODIFIER_SYMBOLS.BETWEEN}
+              :
+              {` `}
+              {attackModifiers.btwn}
+              &quot;
+            </div>
           )}
           {attackEffects?.map((effect, i) => (
-            <div className="flex flex-col mb-[0px] w-full leading-[10px]" key={`${effect.type}-${i}`}>{effect.trigger}:{effect.description}</div>
+            <div className="flex flex-col mb-[0px] w-full leading-[10px]" key={`${effect.type}-${i}`}>
+              {effect.trigger}
+              :
+              {effect.description}
+            </div>
           ))}
         </div>
       )}
-      { subType === "reaction" && (
+      { subType === `reaction` && (
         <div id="content" className="h-[0.75in] w-fit flex flex-col flex-wrap items-start gap-0">
-          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[3px] mr-[4px]">{ACTION_SYMBOLS.REACTION} {name}</div>
+          <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[3px] mr-[4px]">
+            {ACTION_SYMBOLS.RESPONSE}
+            {` `}
+            {name}
+          </div>
           <div className="flex flex-row mb-[0px] w-fit leading-[10px]">
             <strong className="mr-1">Trigger:</strong>
             {trigger}
@@ -140,18 +215,23 @@ export default function Facet ({
           </div>
         </div>
       )}
-      {(type === "instant" || type === "passive") && (
+      {(type === `instant` || type === `passive`) && (
         <div>
           <div id="facetName" className="font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]">
-          {type === "instant" && `${ACTION_SYMBOLS.INSTANT} `}
-          {type === "passive" && `${ACTION_SYMBOLS.PASSIVE} `}
-          {type === "reaction" && `${ACTION_SYMBOLS.REACTION} `}
-          {name}
-        </div>
-          <div> {description}</div>
-          {type === "reaction" && (
+            {type === `instant` && `${ACTION_SYMBOLS.INSTANT} `}
+            {type === `passive` && `${ACTION_SYMBOLS.TRAIT} `}
+            {type === `reaction` && `${ACTION_SYMBOLS.RESPONSE} `}
+            {name}
+          </div>
+          <div>
+            {` `}
+            {description}
+          </div>
+          {type === `reaction` && (
             <div className="text-[8px] text-gray-600 mt-1">
-              <strong>Trigger:</strong> {trigger}
+              <strong>Trigger:</strong>
+              {` `}
+              {trigger}
             </div>
           )}
         </div>

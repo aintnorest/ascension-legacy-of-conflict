@@ -144,7 +144,10 @@ export default function StatsView({
   const defenseData = calculateUpgradeCosts('defense', pendingDefense);
   const attackSkillData = calculateUpgradeCosts('attackSkill', pendingAttackSkill);
   const stridesData = calculateUpgradeCosts('strides', pendingStrides);
-
+  console.log("- woundsData", woundsData);
+  console.log("- defenseData", defenseData);
+  console.log("- attackSkillData", attackSkillData);
+  console.log("- stridesData", stridesData);
   // Handle clicking on an upgrade option
   const handleStatClick = (statKey, finalValue) => {
     switch (statKey) {
