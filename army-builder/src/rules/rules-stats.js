@@ -1,14 +1,34 @@
 import { STATS_SYMBOLS } from './symbols.js';
 
 export const BASE_STATS_TABLE = [
-  { value: 1, min: 25, max: 39, strides: 3, wounds: 1, influence: `0"`, attackSkill: 0, defense: 2, sizeCost: 0 },
-  { value: 2, min: 40, max: 59, strides: 2, wounds: 1, influence: `1"`, attackSkill: 0, defense: 2, sizeCost: 1 },
-  { value: 3, min: 60, max: 89, strides: 2, wounds: 1, influence: `3"`, attackSkill: 0, defense: 2, sizeCost: 2 },
-  { value: 4, min: 90, max: 129, strides: 1, wounds: 2, influence: `4"`, attackSkill: 0, defense: 2, sizeCost: 4 },
-  { value: 5, min: 130, max: 170, strides: 1, wounds: 2, influence: `5"`, attackSkill: 0, defense: 2, sizeCost: 5 },
+  { value: 0.5, min: 0, max: 24, strides: 4, wounds: 1, influence: `0"`, attackSkill: 0, defense: 1, sizeCost: 0, terrainOnly: true, exampleReferences: `Dog, mailbox, crate` },
+  { value: 1, min: 25, max: 39, strides: 3, wounds: 1, influence: `0"`, attackSkill: 0, defense: 2, sizeCost: 0, exampleReferences: `Human, humanoid` },
+  { value: 2, min: 40, max: 59, strides: 2, wounds: 1, influence: `1"`, attackSkill: 0, defense: 2, sizeCost: 1, exampleReferences: `Large human, motorcycle` },
+  { value: 3, min: 60, max: 89, strides: 2, wounds: 1, influence: `3"`, attackSkill: 0, defense: 2, sizeCost: 2, exampleReferences: `Car, large dumpster` },
+  { value: 4, min: 90, max: 129, strides: 1, wounds: 2, influence: `4"`, attackSkill: 0, defense: 2, sizeCost: 4, exampleReferences: `Dump truck, small building` },
+  { value: 5, min: 130, max: 170, strides: 1, wounds: 2, influence: `5"`, attackSkill: 0, defense: 2, sizeCost: 5, exampleReferences: `Medium building` },
+  { value: 6, min: 171, max: 999, strides: 1, wounds: 3, influence: `6"`, attackSkill: 0, defense: 3, sizeCost: 8, terrainOnly: true, exampleReferences: `Large building` },
 ];
 
 export const STAT_COSTS_AND_MAX = {
+  size: {
+    icon: STATS_SYMBOLS.SIZE,
+    name: `Size`,
+    baseValue: `size`, // property name in character data
+    maxUpgrades: 0, // Size is determined by model, not upgraded
+    costType: `fixed`,
+    costs: [], // No upgrade costs, cost is in BASE_STATS_TABLE
+    description: `Size is determined by the model's base diameter in millimeters. Larger models have different base stats and capabilities.`,
+  },
+  influence: {
+    icon: STATS_SYMBOLS.INFLUENCE,
+    name: `Influence`,
+    baseValue: `influence`, // property name in sizeRows
+    maxUpgrades: 0, // Influence is determined by size, not upgraded separately
+    costType: `size-based`,
+    costs: {},
+    description: `Influence determines the range at which this character can interact with scenario components. Measured in inches.`,
+  },
   wounds: {
     icon: STATS_SYMBOLS.WOUNDS,
     name: `Wounds`,
@@ -47,7 +67,7 @@ export const STAT_COSTS_AND_MAX = {
       2: 3,
       3: 4,
       4: 5,
-      5: 5,
+      5: 6,
     },
     description: `Each additional Stride beyond the model's Base Strides has a fixed cost based on the model's Size Value.`,
   },
@@ -58,7 +78,7 @@ const sizeCategoryTable = {
   title: `Size Category Selection`,
   description: `Model base size determines the character's Size Category.`,
   headers: [`Base Size`, `Size Value`, `Cost`],
-  computeRows: () => BASE_STATS_TABLE.map(row => [
+  computeRows: () => BASE_STATS_TABLE.filter(row => !row.terrainOnly).map(row => [
     `${row.min}-${row.max}mm`,
     row.value.toString(),
     row.sizeCost.toString(),
@@ -70,7 +90,7 @@ const baseStatsBySizeTable = {
   title: `Base Stats by Size`,
   description: `Base stats for each Size Category. These stats are used as the foundation for character creation.`,
   headers: [`${STATS_SYMBOLS.SIZE} Size`, `${STATS_SYMBOLS.STRIDES} Strides`, `${STATS_SYMBOLS.WOUNDS} Wounds`, `${STATS_SYMBOLS.INFLUENCE} Influence`, `${STATS_SYMBOLS.ATTACK_SKILL} Attack Skill`, `${STATS_SYMBOLS.DEFENSE} Defense`],
-  computeRows: () => BASE_STATS_TABLE.map(row => [
+  computeRows: () => BASE_STATS_TABLE.filter(row => !row.terrainOnly).map(row => [
     row.value.toString(),
     row.strides.toString(),
     row.wounds.toString(),
@@ -82,7 +102,7 @@ const baseStatsBySizeTable = {
 
 export const sizeCategorySelection = {
   name: `Size Category Selection and Base Stats`,
-  description: `The first step in character creation is to select a Size Category.`,
+  description: `When creating a character start with a miniature model you want to represent. The model's base size according to their largest dimension in millimeters determines its Size Category, which in turn defines its base stats. Each Size Category has a specific Size Value and associated costs for upgrades.`,
   rules: [
     sizeCategoryTable,
     baseStatsBySizeTable,

@@ -5,7 +5,6 @@ export const RESPONSE_ACTIONS = {
     trigger: `When targeted by push or throw`,
     cost: 12,
     category: `defensive`,
-    targeting: `self`,
     effect: `Immunity to displacement for one attack`,
   },
   reduceDisplacement: {
@@ -14,7 +13,6 @@ export const RESPONSE_ACTIONS = {
     trigger: `When pushed or knocked back`,
     cost: 8,
     category: `defensive`,
-    targeting: `self`,
     effect: `Reduce displacement distance by 2"`,
   },
   displaceSelfReaction: {
@@ -23,7 +21,6 @@ export const RESPONSE_ACTIONS = {
     trigger: `When targeted by an attack`,
     cost: 8,
     category: `evasive`,
-    targeting: `self`,
     range: `1"`,
     effect: `Move 1" before attack resolution`,
   },
@@ -33,7 +30,6 @@ export const RESPONSE_ACTIONS = {
     trigger: `When targeted by an attack`,
     cost: 8,
     category: `defensive`,
-    targeting: `self`,
     effect: `Draw 3 defense cards, discard 1`,
   },
 };

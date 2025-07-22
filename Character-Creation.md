@@ -67,7 +67,7 @@ Attack Template Modifiers:
 
 ## Size Category Selection and Base Stats
 
-The first step in character creation is to select a Size Category.
+When creating a character start with a miniature model you want to represent. The model's base size according to their largest dimension in millimeters determines its Size Category, which in turn defines its base stats. Each Size Category has a specific Size Value and associated costs for upgrades.
 
 ### Size Category Selection
 
@@ -107,7 +107,7 @@ Cost of increasing Strides based on Size Category.
 | 2 | 2 | 3 |
 | 3 | 2 | 4 |
 | 4 | 1 | 5 |
-| 5 | 1 | 5 |
+| 5 | 1 | 6 |
 
 ### Wound Upgrade Costs
 
@@ -496,20 +496,18 @@ Special abilities that can be activated during gameplay. A model MAY only use on
 
 | Ability Action | Description | Cost |
 | --- | --- | --- |
-| **Displacement** |  |  |
-| Displace Target (Reach, Size -2) | Throw target 2 sizes smaller within reach | 12 points |
-| Displace Terrain (Reach, Size -2) | Throw terrain 2 sizes smaller within reach | 10 points |
-| Displace Self (LOS, 6") | Place this model anywhere within 6" and line of sight | 6 points |
-| Displace Self (No LOS, 4") | Place this model anywhere within 4", ignoring line of sight | 8 points |
+| **Control** |  |  |
+| Displace Target (Reach, Size -2) | Throw target 2 sizes smaller that is in base contact. | 12 points |
+| Displace Terrain (Reach, Size -2) | Throw terrain 2 sizes smaller that is in base contact. | 10 points |
+| Compel Movement (LOS, 4") | Target can only move toward this model on its next activation | 8 points |
 |  |  |  |
 | **Movement** |  |  |
+| Displace Self (LOS, 6") | Place this model anywhere within 6" and line of sight | 6 points |
 | Shift Self (1") | Move this model 1"; does not count as movement | 4 points |
+| Displace Self (No LOS, 4") | Place this model anywhere within 4", ignoring line of sight | 8 points |
 |  |  |  |
 | **Utility** |  |  |
 | Remove Temporary Effect (4") | Remove one temporary effect on a model within 4" | 8 points |
-|  |  |  |
-| **Control** |  |  |
-| Compel Movement (LOS, 4") | Target can only move toward this model on its next activation | 8 points |
 
 ### Response Actions
 

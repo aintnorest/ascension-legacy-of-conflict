@@ -82,7 +82,7 @@ Attack Template Modifiers:
 - ${ATTACK_MODIFIER_SYMBOLS.TARGETS}: Number of Targets (e.g., T:2 for 2 targets)
 - ${ATTACK_MODIFIER_SYMBOLS.BETWEEN}: Range Between Targets (e.g., Btwn:2" for 2 inches between targets)
 - ${ATTACK_MODIFIER_SYMBOLS.INITIAL_RANGE}: Initial Range, like Range but for the Ricochet attack template
-  `,
+`,
 };
 
 const CharacterCreation = {

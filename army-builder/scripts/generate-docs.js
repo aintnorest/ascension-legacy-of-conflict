@@ -1,9 +1,9 @@
-const fs = require('fs/promises');
-const path = require('path');
+const fs = require(`fs/promises`);
+const path = require(`path`);
 
 // Dynamically import ES modules.
 const importESM = async (modulePath) => {
-  const fullPath = path.resolve(__dirname, '..', modulePath);
+  const fullPath = path.resolve(__dirname, `..`, modulePath);
   // Use a cache-busting query string to ensure the latest version is imported.
   // The cache buster was causing issues with babel-register, so it's removed for now.
   return await import(fullPath);
@@ -11,81 +11,83 @@ const importESM = async (modulePath) => {
 
 const generateMarkdownTable = (tableDefinition, level = 3) => {
   const { title, description, headers, computeRows } = tableDefinition;
-  
-  let markdown = '';
-  
+
+  let markdown = ``;
+
   if (title) {
-    markdown += `${'#'.repeat(level)} ${title}\n\n`;
+    markdown += `${`#`.repeat(level)} ${title}\n\n`;
   }
-  
+
   if (description) {
     markdown += `${description}\n\n`;
   }
-  
+
   // Generate rows from computeRows function
   const rows = computeRows ? computeRows() : [];
-  
+
   if (headers && headers.length > 0 && rows.length > 0) {
     // Create header row
-    markdown += `| ${headers.join(' | ')} |\n`;
-    
+    markdown += `| ${headers.join(` | `)} |\n`;
+
     // Create separator row
-    markdown += `| ${headers.map(() => '---').join(' | ')} |\n`;
-    
+    markdown += `| ${headers.map(() => `---`).join(` | `)} |\n`;
+
     // Create data rows
-    rows.forEach(row => {
-      markdown += `| ${row.join(' | ')} |\n`;
+    rows.forEach((row) => {
+      markdown += `| ${row.join(` | `)} |\n`;
     });
-    
-    markdown += '\n';
+
+    markdown += `\n`;
   }
-  
+
   return markdown;
 };
 
 const generateMarkdownForRule = (rule, level = 1) => {
-  let markdown = '';
+  let markdown = ``;
 
   // Handle table types
-  if (rule.type === 'table') {
+  if (rule.type === `table`) {
     return generateMarkdownTable(rule, level);
   }
 
   if (rule.name) {
-    markdown += `${'#'.repeat(level)} ${rule.name}\n\n`;
+    markdown += `${`#`.repeat(level)} ${rule.name}\n\n`;
   }
 
   if (rule.description) {
     // Trim and handle multiline descriptions, removing backticks
-    markdown += `${rule.description.trim().replace(/`/g, '')}\n\n`;
+    markdown += `${rule.description.trim().replace(/`/g, ``)}\n\n`;
   }
 
   // Handle specific rule properties for detailed formatting
   if (rule.maxUpgrades) {
     markdown += `- **Max Upgrades:** ${rule.maxUpgrades}\n`;
   }
-  if (rule.costType === 'progressive' && Array.isArray(rule.costs)) {
+  if (rule.costType === `progressive` && Array.isArray(rule.costs)) {
     const totalCosts = rule.costs.reduce((acc, cost, index) => {
       const total = (acc[index - 1] || 0) + cost;
       acc.push(total);
       return acc;
     }, []);
-    markdown += '- **Costs (Incremental: Total):**\n';
+    markdown += `- **Costs (Incremental: Total):**\n`;
     rule.costs.forEach((cost, i) => {
       markdown += `  - +${i + 1}: (${cost}: ${totalCosts[i]})\n`;
     });
-    markdown += '\n';
-  } else if (rule.costType === 'size-based' && typeof rule.costs === 'object') {
-    markdown += '- **Costs by Size:**\n';
+    markdown += `\n`;
+  }
+  else if (rule.costType === `size-based` && typeof rule.costs === `object`) {
+    markdown += `- **Costs by Size:**\n`;
     for (const [size, cost] of Object.entries(rule.costs)) {
       markdown += `  - Size ${size}: ${cost} points\n`;
     }
-    markdown += '\n';
+    markdown += `\n`;
   }
 
   if (rule.min !== undefined && rule.max !== undefined && rule.unit) {
     markdown += `- **Valid Range:** ${rule.min}-${rule.max}${rule.unit}\n\n`;
-  } else if (rule.min !== undefined) {
+  }
+  else if (rule.min !== undefined) {
     markdown += `- **Minimum:** ${rule.min}\n\n`;
   }
 
@@ -99,42 +101,45 @@ const generateMarkdownForRule = (rule, level = 1) => {
   return markdown;
 };
 
-
 const generateDocs = async () => {
-  const rulesDir = path.resolve(__dirname, '..', 'src/rules');
-  const outputDir = path.resolve(__dirname, '..', '..'); // Project root
+  const rulesDir = path.resolve(__dirname, `..`, `src/rules`);
+  const outputDir = path.resolve(__dirname, `..`, `..`); // Project root
 
   try {
     const files = await fs.readdir(rulesDir);
-    const docFiles = files.filter(file => file.startsWith('doc-') && file.endsWith('.js'));
+    const docFiles = files.filter(file => file.startsWith(`doc-`) && file.endsWith(`.js`));
 
     if (docFiles.length === 0) {
-      console.log('No doc files found in src/rules.');
+      // eslint-disable-next-line no-console
+      console.log(`No doc files found in src/rules.`);
       return;
     }
 
     for (const docFile of docFiles) {
-      const modulePath = path.join('src/rules', docFile);
+      const modulePath = path.join(`src/rules`, docFile);
       try {
         const ruleModule = await importESM(modulePath);
         const rootRule = ruleModule.default;
 
         if (rootRule) {
           const markdownContent = generateMarkdownForRule(rootRule);
-          
-          const outputFileName = `${rootRule.name.replace(/\s+/g, '-')}.md`;
+
+          const outputFileName = `${rootRule.name.replace(/\s+/g, `-`)}.md`;
           const outputFilePath = path.join(outputDir, outputFileName);
 
           // Trim trailing whitespace and ensure a single newline at the end
-          await fs.writeFile(outputFilePath, markdownContent.trim() + '\n');
+          await fs.writeFile(outputFilePath, `${markdownContent.trim()}\n`);
+          // eslint-disable-next-line no-console
           console.log(`Generated: ${outputFilePath}`);
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.error(`Error processing ${docFile}:`, error);
       }
     }
-  } catch (error) {
-    console.error('Failed to generate documentation:', error);
+  }
+  catch (error) {
+    console.error(`Failed to generate documentation:`, error);
   }
 };
 

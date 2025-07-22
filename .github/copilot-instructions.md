@@ -70,7 +70,7 @@ This document outlines the architectural principles and code organization rules 
 ### Dedicated `rules` Folder
 
 * **Rule:** All files containing core game rules, game logic, or related calculation functions MUST reside within the `/army-builder/src/rules` directory.
-* **Directive:** When generating new game logic or rule-related code, always propose placing it in `/army-builder/src/rules/` (e.g., `/army-builder/src/rules/characterValidation.js`, `/army-builder/src/rules/abilityCalculations.ts`).
+* **Directive:** When generating new game logic or rule-related code, always propose placing it in `/army-builder/src/rules/` (e.g., `/army-builder/src/rules/rules-characterValidation.js`, `/army-builder/src/rules/rules-abilityCalculations.js`).
 
 ---
 
