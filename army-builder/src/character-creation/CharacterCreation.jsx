@@ -24,6 +24,15 @@ export default function CharacterCreation() {
   }
 
   /**
+   * Loads a complete character (replaces current character entirely).
+   * @param {Object} newCharacter - Complete character object to load
+   */
+  function loadCharacter(newCharacter) {
+    setCharacter(newCharacter);
+    setCurrentView(`character-card`);
+  }
+
+  /**
    * Updates character size and resets character to defaults with base stats from size.
    * @param {Object} sizeData - Size data with value and mm
    * @param {Object} baseStats - Base stats for the selected size
@@ -114,7 +123,7 @@ export default function CharacterCreation() {
         character={character}
         onUpdateCharacter={updateCharacter}
         onUpdateCharacterSize={updateCharacterSize}
-        onViewChange={setCurrentView}
+        onLoadCharacter={loadCharacter}
         onFacetDelete={handleFacetDelete}
       />
     </section>

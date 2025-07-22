@@ -6,6 +6,7 @@ import AttackActionView from "./AttackActionView";
 import AbilityActionView from "./AbilityActionView";
 import ResponseActionView from "./ResponseActionView";
 import TraitsView from "./TraitsView";
+import SavedCharactersView from "./SavedCharactersView";
 // import ReactionView from "./ReactionView";
 
 const classNames = {
@@ -19,6 +20,7 @@ export default function View({
   character,
   onUpdateCharacter,
   onUpdateCharacterSize,
+  onLoadCharacter,
   onFacetDelete,
 }) {
   const renderView = () => {
@@ -87,6 +89,12 @@ export default function View({
               };
               onUpdateCharacter(updatedCharacter);
             }}
+          />
+        );
+      case `saved-characters`:
+        return (
+          <SavedCharactersView
+            onLoadCharacter={onLoadCharacter}
           />
         );
       case `character-card`:

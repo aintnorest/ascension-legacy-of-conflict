@@ -6,6 +6,10 @@ import {
   getEffectiveAttackSkill,
   getInitialTemplateConfig,
 } from "./attackActionHelpers";
+import {
+  canAddMoreAttackEffects,
+  getAttackEffectLimitInfo,
+} from "@/rules/rules-attackEffects";
 import AttackTemplateSelector from "./AttackTemplateSelector";
 import AttackEffectsSelector from "./AttackEffectsSelector";
 import { ACTION_TOKEN_SYMBOLS } from "@/rules/symbols";
@@ -21,6 +25,8 @@ const classNames = {
   skillTitle: `font-medium`,
   skillDisplay: `p-2 bg-gray-100 border border-gray-300 rounded`,
   tokenInfo: `text-sm text-gray-600 mt-2`,
+  effectLimitInfo: `p-2 bg-blue-50 border border-blue-300 rounded text-sm`,
+  effectLimitWarning: `p-2 bg-yellow-50 border border-yellow-300 rounded text-sm text-yellow-800`,
   totalCost: `text-lg font-bold`,
   addButton: `bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600`,
   addButtonDisabled: `bg-gray-300 text-gray-500 px-4 py-2 rounded cursor-not-allowed`,
@@ -34,6 +40,9 @@ export default function AttackActionView({ character, onAddAttackAction }) {
 
   // Get attack skill from character
   const attackSkill = character?.stats?.attackSkill || 0;
+
+  // Get effect limit information using the rule
+  const effectLimitInfo = getAttackEffectLimitInfo(attackSkill, selectedEffects.length);
 
   // Update template config when template changes
   const handleTemplateChange = (templateKey) => {
@@ -54,7 +63,9 @@ export default function AttackActionView({ character, onAddAttackAction }) {
 
   // Handle adding an effect
   const handleAddEffect = (effect) => {
-    setSelectedEffects([...selectedEffects, effect]);
+    if (canAddMoreAttackEffects(attackSkill, selectedEffects.length)) {
+      setSelectedEffects([...selectedEffects, effect]);
+    }
   };
 
   // Handle removing an effect
@@ -133,6 +144,30 @@ export default function AttackActionView({ character, onAddAttackAction }) {
         </div>
       </div>
 
+      {/* Effect Limit Information */}
+      <div className={classNames.skillSection}>
+        <h3 className={classNames.skillTitle}>Attack Effects Limit:</h3>
+        <div className={
+          effectLimitInfo.atLimit
+            ? classNames.effectLimitWarning
+            : classNames.effectLimitInfo
+        }
+        >
+          <div>
+            <strong>Attack Skill:</strong>
+            {` ${effectLimitInfo.attackSkill} allows up to ${effectLimitInfo.maxEffects} effect${effectLimitInfo.maxEffects !== 1 ? `s` : ``}`}
+          </div>
+          <div>
+            <strong>Current Effects:</strong>
+            {` ${effectLimitInfo.currentEffectCount}/${effectLimitInfo.maxEffects}`}
+            {effectLimitInfo.atLimit ? ` (Maximum reached)` : ``}
+          </div>
+        </div>
+        <div className={classNames.tokenInfo}>
+          {effectLimitInfo.rule}
+        </div>
+      </div>
+
       {/* Template Selection */}
       <AttackTemplateSelector
         selectedTemplate={selectedTemplate}
@@ -144,6 +179,7 @@ export default function AttackActionView({ character, onAddAttackAction }) {
       {/* Effects Selection */}
       <AttackEffectsSelector
         selectedEffects={selectedEffects}
+        maxEffectsAllowed={effectLimitInfo.maxEffects}
         onAddEffect={handleAddEffect}
         onRemoveEffect={handleRemoveEffect}
       />

@@ -1,5 +1,6 @@
 import React from "react";
 import { Tooltip } from "react-tooltip";
+import { saveCharacter } from "./savedCharacterHelpers";
 
 const classNames = {
   panel: `rounded-lg text-black relative`,
@@ -14,7 +15,12 @@ const classNames = {
   costBadge: `absolute top-2 right-2 bg-sky-100 border-2 border-sky-500 text-sky-800 font-bold text-[10px] px-2 py-1 rounded-full`,
 };
 
-export default function Menu({ character, onViewChange, onUpdateCharacter, calculatedValues }) {
+export default function Menu({
+  character,
+  onViewChange,
+  onUpdateCharacter,
+  calculatedValues,
+}) {
   /**
    * Handles character name changes and switches to character card view.
    * @param {Event} e - Input change event
@@ -22,6 +28,20 @@ export default function Menu({ character, onViewChange, onUpdateCharacter, calcu
   function handleNameChange(e) {
     onUpdateCharacter({ name: e.target.value });
     onViewChange(`character-card`);
+  }
+
+  /**
+   * Saves the current character to local storage
+   */
+  function handleSaveCharacter() {
+    const result = saveCharacter(character);
+
+    if (result.success) {
+      alert(result.message);
+    }
+    else {
+      alert(result.error);
+    }
   }
 
   // Check if size is selected
@@ -98,6 +118,18 @@ export default function Menu({ character, onViewChange, onUpdateCharacter, calcu
             disabled={!hasSizeSelected}
           >
             Add Trait
+          </button>
+          <button
+            className={classNames.button}
+            onClick={handleSaveCharacter}
+          >
+            Save Character
+          </button>
+          <button
+            className={classNames.button}
+            onClick={() => onViewChange(`saved-characters`)}
+          >
+            Manage Saved Characters
           </button>
           <button
             className={classNames.button}

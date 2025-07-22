@@ -1,5 +1,5 @@
 import { ATTACK_TEMPLATE_SYMBOLS, ACTION_TOKEN_SYMBOLS } from './symbols.js';
-import { generateAttackEffectsTables } from './rules-attackEffects.js';
+import { generateAttackEffectsTables, calculateMaxAttackEffects } from './rules-attackEffects.js';
 
 export const ATTACK_TEMPLATES = {
   singleTarget: {
@@ -160,6 +160,24 @@ const attackTemplateRules = {
   ],
 };
 
+const attackEffectLimitRules = {
+  name: `Attack Effect Limits`,
+  description: `Attack Actions can include effects that trigger under specific conditions. However, the number of effects an attack can have is limited by the character's Attack Skill.
+
+Effect Limit Rule:
+- Attacks can have 1 effect per 2 Attack Skill points (minimum 1 effect if Attack Skill ≥ 0)
+- This limit is based on the character's base Attack Skill, unmodified by template type or action token usage
+
+Examples:
+${[0, 1, 2, 3, 4, 5, 6, 7].map(skill =>
+  `- Attack Skill ${skill}: Maximum ${calculateMaxAttackEffects(skill)} effect${calculateMaxAttackEffects(skill) !== 1 ? `s` : ``}`,
+).join(`\n`)}
+
+The calculation is: Maximum Effects = floor((Attack Skill + 2) / 2)
+
+This ensures that more skilled attackers can create more complex attacks while preventing overwhelming combinations at low skill levels.`,
+};
+
 export const attackActionRules = {
   name: `Attack Action Rules`,
   description: `This section details rules for creating Attack Actions. Attack's use the character's Attack Skill modified by the chosen attack template.
@@ -184,6 +202,7 @@ Example: A character with Attack Skill 3 using an Area attack template:
 `,
   rules: [
     attackTemplateRules,
+    attackEffectLimitRules,
     ...generateAttackEffectsTables(),
   ],
 };

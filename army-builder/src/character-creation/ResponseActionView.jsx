@@ -63,6 +63,9 @@ export default function ResponseActionView({ onAddResponseAction }) {
           <strong>Response Action Rules:</strong>
         </div>
         <div className="space-y-1">
+          <p>
+            Custom names are optional and help personalize your character
+          </p>
           {Object.entries(RESPONSE_ACTION_RULES).map(([ruleKey, rule]) => (
             <p key={ruleKey}>
               •

@@ -21,9 +21,13 @@ const classNames = {
 
 export default function AttackEffectsSelector({
   selectedEffects,
+  maxEffectsAllowed,
   onAddEffect,
   onRemoveEffect,
 }) {
+  // Check if we can add more effects
+  const canAddMoreEffects = selectedEffects.length < maxEffectsAllowed;
+
   // Handle adding an effect
   const handleAddEffect = (categoryKey, effectKey, triggerKey, cost) => {
     const newEffect = createEffectObject(categoryKey, effectKey, triggerKey, cost);
@@ -75,11 +79,18 @@ export default function AttackEffectsSelector({
                       key={triggerKey}
                       onClick={() => handleAddEffect(categoryKey, effectKey, triggerKey, cost)}
                       className={
-                        cost >= 0
+                        cost >= 0 && canAddMoreEffects
                           ? classNames.triggerButton
                           : classNames.triggerButtonDisabled
                       }
-                      disabled={cost < 0}
+                      disabled={cost < 0 || !canAddMoreEffects}
+                      title={
+                        !canAddMoreEffects
+                          ? `Maximum effects reached (${maxEffectsAllowed})`
+                          : cost < 0
+                            ? `Not available`
+                            : `Add this effect`
+                      }
                     >
                       {triggerKey}
                       :

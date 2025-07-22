@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Tooltip } from "react-tooltip";
+import { useReactToPrint } from "react-to-print";
 import Facet from './Facet';
 import TokenSlot from './TokenSlot';
 import { ACTION_TOKEN_SYMBOLS, STATS_SYMBOLS, ACTION_SYMBOLS } from '@/rules/symbols';
@@ -7,7 +8,7 @@ import { STAT_COSTS_AND_MAX } from '@/rules/rules-stats';
 import { calculateActionTokens } from '@/rules/utils-characterCosts';
 
 const classNames = {
-  characterCard: `w-[4in] h-[6in] box-border border-2 border-[#222] rounded-lg p-[0.15in] bg-[#faf9f6] font-['Roboto_Condensed',Arial,Helvetica,sans-serif] text-[10px] text-black flex flex-col`,
+  characterCard: `w-[4in] h-[6in] box-border border-2 border-[#222] rounded-lg p-[0.15in] bg-[#faf9f6] font-['Roboto_Condensed',Arial,Helvetica,sans-serif] text-[10px] text-black flex flex-col relative`,
   characterCardRow: `flex items-stretch w-full grid grid-cols-[1fr_auto] mb-[0.05in]`,
   coreInfo: `pr-[0.05in] relative flex flex-col justify-end w-full`,
   nameRow: `text-[14px] truncate overflow-hidden whitespace-nowrap absolute top-[-8px] left-[-3px] w-full z-10 p-0 px-0`,
@@ -17,6 +18,7 @@ const classNames = {
   statSize: `text-[8px]`,
   coreUsage: `flex gap-[0.05in]`,
   facetsContainer: `flex flex-wrap items-start gap-2 w-full min-h-[0.75in]`,
+  printButton: `absolute bottom-2 right-2 bg-sky-500 hover:bg-sky-700 text-white text-[8px] px-2 py-1 rounded cursor-pointer transition print:hidden`,
 };
 
 export default function Card({
@@ -24,6 +26,8 @@ export default function Card({
   edit = false,
   onFacetDelete = null,
 }) {
+  const printRef = useRef();
+
   // Combine all facets from different action types
   const allFacets = [
     ...character.attackActions,
@@ -32,8 +36,31 @@ export default function Card({
     ...character.traits,
   ];
 
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: `Character Card - ${character.name || `Character`}`,
+    pageStyle: `
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        * {
+          -webkit-print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+    `,
+  });
+
   return (
-    <section className={classNames.characterCard}>
+    <section ref={printRef} id="characterCardProfile" className={classNames.characterCard}>
       {/* Top Row - Character Info and Core Stats */}
       <div className={classNames.characterCardRow}>
         <div className={classNames.coreInfo}>
@@ -137,6 +164,17 @@ export default function Card({
       <Tooltip id="action-tokens-tooltip" />
       <Tooltip id="strides-tooltip" />
       <Tooltip id="wounds-tooltip" />
+
+      {/* Print Button - only visible in edit mode and hidden when printing */}
+      {edit && (
+        <button
+          className={classNames.printButton}
+          onClick={handlePrint}
+          title="Print Character Card"
+        >
+          🖨️ Print
+        </button>
+      )}
     </section>
   );
 }

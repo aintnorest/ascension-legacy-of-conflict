@@ -84,6 +84,7 @@ export default function TraitsView({ onAddTrait }) {
           <strong>Trait Rules:</strong>
         </div>
         <div className="space-y-1">
+          <p>• Custom names are optional and help personalize your character</p>
           <p>• Traits are passive abilities that are always active</p>
           <p>• Each trait can only be purchased once per character</p>
         </div>

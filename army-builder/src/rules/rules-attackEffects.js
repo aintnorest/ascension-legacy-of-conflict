@@ -135,3 +135,47 @@ export function generateAttackEffectsTables() {
 
   return tables;
 };
+
+/**
+ * Calculate the maximum number of effects allowed for an attack based on Attack Skill
+ * Rule: Attacks can have 1 effect per 2 Attack Skill points (minimum 1 effect if Attack Skill ≥ 0)
+ * @param {number} attackSkill - The base, unmodified Attack Skill value
+ * @returns {number} Maximum number of effects allowed
+ */
+export function calculateMaxAttackEffects(attackSkill) {
+  if (attackSkill < 0) {
+    return 0;
+  }
+  return Math.floor((attackSkill + 2) / 2);
+}
+
+/**
+ * Check if more effects can be added to an attack
+ * @param {number} attackSkill - The base, unmodified Attack Skill value
+ * @param {number} currentEffectCount - Current number of effects selected
+ * @returns {boolean} True if more effects can be added
+ */
+export function canAddMoreAttackEffects(attackSkill, currentEffectCount) {
+  const maxEffects = calculateMaxAttackEffects(attackSkill);
+  return currentEffectCount < maxEffects;
+}
+
+/**
+ * Get effect limit information for display purposes
+ * @param {number} attackSkill - The base, unmodified Attack Skill value
+ * @param {number} currentEffectCount - Current number of effects selected
+ * @returns {object} Object containing limit info for UI display
+ */
+export function getAttackEffectLimitInfo(attackSkill, currentEffectCount) {
+  const maxEffects = calculateMaxAttackEffects(attackSkill);
+  const atLimit = currentEffectCount >= maxEffects;
+
+  return {
+    attackSkill,
+    maxEffects,
+    currentEffectCount,
+    atLimit,
+    canAddMore: !atLimit,
+    rule: `Attacks can have 1 effect per 2 Attack Skill points (minimum 1 effect if Attack Skill ≥ 0).`,
+  };
+}
