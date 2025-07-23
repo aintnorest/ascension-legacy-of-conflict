@@ -78,7 +78,11 @@ export default function RulesViewer() {
         }
 
         // Fetch the markdown file from the public directory or repository root
-        const response = await fetch(`/${ruleFile.file}`);
+        // Use base path for GitHub Pages deployment
+        // Get base path from Next.js config or use the one from build time
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ``;
+        const fetchUrl = basePath ? `${basePath}/${ruleFile.file}` : `/${ruleFile.file}`;
+        const response = await fetch(fetchUrl);
         if (!response.ok) {
           throw new Error(`Failed to load ${ruleFile.name}`);
         }
