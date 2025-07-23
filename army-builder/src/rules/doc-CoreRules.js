@@ -1,4 +1,4 @@
-import { SUIT_SYMBOLS } from './symbols.js';
+import { SUIT_SYMBOLS } from './symbols';
 
 const deckComposition = `**Deck Composition:**
 

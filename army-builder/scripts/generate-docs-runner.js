@@ -1,7 +1,5 @@
-require('@babel/register')({
-    presets: ['@babel/preset-env'],
-    ignore: [/node_modules/],
-    extensions: ['.js']
+require(`@babel/register`)({
+  presets: [`@babel/preset-env`],
 });
 
-require('./generate-docs.js');
+require(`./generate-docs.js`);
