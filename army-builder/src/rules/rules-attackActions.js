@@ -165,10 +165,12 @@ const attackEffectLimitRules = {
   description: `Attack Actions can include effects that trigger under specific conditions. However, the number of effects an attack can have is limited by the character's Attack Skill.
 
 Effect Limit Rule:
+
 - Attacks can have 1 effect per 2 Attack Skill points (minimum 1 effect if Attack Skill ≥ 0)
 - This limit is based on the character's base Attack Skill, unmodified by template type or action token usage
 
 Examples:
+
 ${[0, 1, 2, 3, 4, 5, 6, 7].map(skill =>
   `- Attack Skill ${skill}: Maximum ${calculateMaxAttackEffects(skill)} effect${calculateMaxAttackEffects(skill) !== 1 ? `s` : ``}`,
 ).join(`\n`)}

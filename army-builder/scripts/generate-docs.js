@@ -104,6 +104,7 @@ const generateMarkdownForRule = (rule, level = 1) => {
 const generateDocs = async () => {
   const rulesDir = path.resolve(__dirname, `..`, `src/rules`);
   const outputDir = path.resolve(__dirname, `..`, `..`); // Project root
+  const publicDir = path.resolve(__dirname, `..`, `public`); // Public directory for Next.js
 
   try {
     const files = await fs.readdir(rulesDir);
@@ -126,11 +127,20 @@ const generateDocs = async () => {
 
           const outputFileName = `${rootRule.name.replace(/\s+/g, `-`)}.md`;
           const outputFilePath = path.join(outputDir, outputFileName);
+          const publicFilePath = path.join(publicDir, outputFileName);
 
           // Trim trailing whitespace and ensure a single newline at the end
-          await fs.writeFile(outputFilePath, `${markdownContent.trim()}\n`);
+          const finalContent = `${markdownContent.trim()}\n`;
+
+          // Write to project root
+          await fs.writeFile(outputFilePath, finalContent);
           // eslint-disable-next-line no-console
           console.log(`Generated: ${outputFilePath}`);
+
+          // Write to public directory
+          await fs.writeFile(publicFilePath, finalContent);
+          // eslint-disable-next-line no-console
+          console.log(`Generated: ${publicFilePath}`);
         }
       }
       catch (error) {

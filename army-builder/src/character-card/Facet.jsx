@@ -17,12 +17,12 @@ const classNames = {
   traitContent: `flex-1 overflow-hidden`,
   deleteButton: `absolute top-0 right-0 z-10 w-4 h-4 bg-red-500 hover:bg-red-600 text-white text-[8px] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer`,
   tokenSlot: `ml-[-2px]`,
-  facetNameAttack: `font-bold w-full whitespace-nowrap mb-[1px] mr-[4px]`,
+  facetNameAttack: `font-bold w-full whitespace-nowrap mr-[4px]`,
   facetNameAbility: `font-bold w-full whitespace-nowrap mb-[1px] mr-[4px]`,
   facetNameResponse: `font-bold w-fit whitespace-nowrap mb-[3px] mr-[4px]`,
   facetNameTrait: `font-bold w-fit whitespace-nowrap mb-[1px] mr-[4px]`,
   attackModifiers: `w-full flex flex-wrap gap-0 mb-[1px]`,
-  attackModifiersContent: `break-words`,
+  attackModifiersContent: `whitespace-pre-wrap break-words text-[11px]`,
   attackEffect: `flex flex-col mb-[0px] w-full leading-[10px]`,
   abilityDescription: `w-full flex flex-col gap-1 text-[10px] leading-[12px]`,
   abilityDescriptionContent: `break-words`,
@@ -38,6 +38,7 @@ export default function Facet({
   attackModifiers,
   attackSkill,
   description,
+  descriptions,
   edit = false,
   name,
   onDelete = null,
@@ -80,7 +81,13 @@ export default function Facet({
                   : GAME_SYMBOLS.EXHAUSTION_SLOT
           }
           topLeft={ACTION_TOKEN_SYMBOLS.SINGLE_TOKEN}
-          bottomLeft={subType === `attack` ? ACTION_TOKEN_SYMBOLS.DOUBLE_TOKEN : null}
+          bottomLeft={
+            subType === `attack`
+              ? ACTION_TOKEN_SYMBOLS.DOUBLE_TOKEN
+              : subType === `ability` && descriptions && descriptions.length === 2
+                ? ACTION_TOKEN_SYMBOLS.DOUBLE_TOKEN
+                : null
+          }
           className={classNames.tokenSlot}
         />
       )}
@@ -93,9 +100,8 @@ export default function Facet({
           {/* Token Usage and Attack Modifiers Display */}
           <div className={classNames.attackModifiers}>
             <div className={classNames.attackModifiersContent}>
-              {STATS_SYMBOLS.ATTACK_SKILL}
-              {`(${ACTION_TOKEN_SYMBOLS.SINGLE_TOKEN}): ${getEffectiveAttackSkill(attackSkill, attackModifiers?.type, `single`)} - (${ACTION_TOKEN_SYMBOLS.DOUBLE_TOKEN}): ${getEffectiveAttackSkill(attackSkill, attackModifiers?.type, `double`)}`}
-              {attackModifiers?.type && ` | `}
+              {`(${ACTION_TOKEN_SYMBOLS.SINGLE_TOKEN}): ${getEffectiveAttackSkill(attackSkill, attackModifiers?.type, `single`)}${STATS_SYMBOLS.ATTACK_SKILL}    (${ACTION_TOKEN_SYMBOLS.DOUBLE_TOKEN}): ${getEffectiveAttackSkill(attackSkill, attackModifiers?.type, `double`)}${STATS_SYMBOLS.ATTACK_SKILL}`}
+              {attackModifiers?.type && `   | `}
               {attackModifiers?.type === `singleTarget` && (
                 <>
                   {ATTACK_TEMPLATE_SYMBOLS.SINGLE_TARGET}
@@ -174,9 +180,21 @@ export default function Facet({
             {name}
           </div>
           <div className={classNames.abilityDescription}>
-            <div className={classNames.abilityDescriptionContent}>
-              {description}
-            </div>
+            {descriptions
+              ? (
+                  descriptions.map((desc, index) => (
+                    <div key={index} className={classNames.abilityDescriptionContent}>
+                      <strong>{desc.symbol}</strong>
+                      {` `}
+                      {desc.description}
+                    </div>
+                  ))
+                )
+              : (
+                  <div className={classNames.abilityDescriptionContent}>
+                    {description}
+                  </div>
+                )}
             {range && (
               <div className={classNames.abilityRange}>
                 Range:

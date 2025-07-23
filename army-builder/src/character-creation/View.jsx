@@ -56,6 +56,7 @@ export default function View({
       case `add-ability-action`:
         return (
           <AbilityActionView
+            character={character}
             onAddAbilityAction={(abilityData) => {
               const updatedCharacter = {
                 ...character,
@@ -81,6 +82,7 @@ export default function View({
       case `add-trait`:
         return (
           <TraitsView
+            character={character}
             onAddTrait={(traitData) => {
               // Add the trait to the character's traits array
               const updatedCharacter = {

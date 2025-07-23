@@ -26,8 +26,8 @@ export const ATTACK_EFFECTS = {
       },
       displaceDefender: {
         name: `Displace Defender`,
-        description: `Move target within 1" of original position`,
-        costs: createSuitCombos(3, 1, 0),
+        description: `Place target within 1" of original position`,
+        costs: createSuitCombos(8, 4, 2),
       },
       knockback: {
         name: `Knockback`,
@@ -36,13 +36,8 @@ export const ATTACK_EFFECTS = {
       },
       throw: {
         name: `Throw`,
-        description: `Throw target if 2 sizes smaller`,
-        costs: createSuitCombos(5, 3, 2),
-      },
-      throwTerrain: {
-        name: `Throw Terrain`,
-        description: `Throw terrain if 2 sizes smaller`,
-        costs: createSuitCombos(4, 2, 1),
+        description: `Throw target if at least 2 sizes smaller`,
+        costs: createSuitCombos(8, 4, 2),
       },
     },
   },
@@ -57,7 +52,7 @@ export const ATTACK_EFFECTS = {
       slow: {
         name: `Slow`,
         description: `Add 1 Slow Token to the Defender`,
-        costs: createSuitCombos(2, 1, 0),
+        costs: createSuitCombos(3, 2, 1),
       },
       weaken: {
         name: `Weaken`,
@@ -139,6 +134,7 @@ export function generateAttackEffectsTables() {
 /**
  * Calculate the maximum number of effects allowed for an attack based on Attack Skill
  * Rule: Attacks can have 1 effect per 2 Attack Skill points (minimum 1 effect if Attack Skill ≥ 0)
+ * Attack Skill 0-2: 1 effect, Attack Skill 3-4: 2 effects, Attack Skill 5-6: 3 effects, etc.
  * @param {number} attackSkill - The base, unmodified Attack Skill value
  * @returns {number} Maximum number of effects allowed
  */
@@ -146,7 +142,15 @@ export function calculateMaxAttackEffects(attackSkill) {
   if (attackSkill < 0) {
     return 0;
   }
-  return Math.floor((attackSkill + 2) / 2);
+
+  // Special handling for the specific groupings you want
+  if (attackSkill <= 2) return 1;
+  if (attackSkill <= 4) return 2;
+  if (attackSkill <= 6) return 3;
+  if (attackSkill <= 8) return 4;
+
+  // For higher attack skills, continue the pattern: every 2 points = 1 more effect
+  return Math.floor((attackSkill - 3) / 2) + 2;
 }
 
 /**

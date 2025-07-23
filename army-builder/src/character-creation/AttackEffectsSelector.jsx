@@ -28,6 +28,13 @@ export default function AttackEffectsSelector({
   // Check if we can add more effects
   const canAddMoreEffects = selectedEffects.length < maxEffectsAllowed;
 
+  // Check if a specific effect is already selected
+  const isEffectAlreadySelected = (categoryKey, effectKey) => {
+    return selectedEffects.some(effect =>
+      effect.categoryKey === categoryKey && effect.effectKey === effectKey,
+    );
+  };
+
   // Handle adding an effect
   const handleAddEffect = (categoryKey, effectKey, triggerKey, cost) => {
     const newEffect = createEffectObject(categoryKey, effectKey, triggerKey, cost);
@@ -69,39 +76,41 @@ export default function AttackEffectsSelector({
         {Object.entries(ATTACK_EFFECTS).map(([categoryKey, category]) => (
           <div key={categoryKey} className={classNames.effectCategory}>
             <h4 className={classNames.effectCategoryTitle}>{category.category}</h4>
-            {Object.entries(category.effects).map(([effectKey, effect]) => (
-              <div key={effectKey} className={classNames.effectCard}>
-                <div className={classNames.effectName}>{effect.name}</div>
-                <div className={classNames.effectDesc}>{effect.description}</div>
-                <div className={classNames.effectTriggers}>
-                  {Object.entries(effect.costs || {}).map(([triggerKey, cost]) => (
-                    <button
-                      key={triggerKey}
-                      onClick={() => handleAddEffect(categoryKey, effectKey, triggerKey, cost)}
-                      className={
-                        cost >= 0 && canAddMoreEffects
-                          ? classNames.triggerButton
-                          : classNames.triggerButtonDisabled
-                      }
-                      disabled={cost < 0 || !canAddMoreEffects}
-                      title={
-                        !canAddMoreEffects
-                          ? `Maximum effects reached (${maxEffectsAllowed})`
-                          : cost < 0
-                            ? `Not available`
-                            : `Add this effect`
-                      }
-                    >
-                      {triggerKey}
-                      :
-                      {` `}
-                      {cost}
-                      {` pts`}
-                    </button>
-                  ))}
+            {Object.entries(category.effects)
+              .filter(([effectKey, _effect]) => !isEffectAlreadySelected(categoryKey, effectKey))
+              .map(([effectKey, effect]) => (
+                <div key={effectKey} className={classNames.effectCard}>
+                  <div className={classNames.effectName}>{effect.name}</div>
+                  <div className={classNames.effectDesc}>{effect.description}</div>
+                  <div className={classNames.effectTriggers}>
+                    {Object.entries(effect.costs || {}).map(([triggerKey, cost]) => (
+                      <button
+                        key={triggerKey}
+                        onClick={() => handleAddEffect(categoryKey, effectKey, triggerKey, cost)}
+                        className={
+                          cost >= 0 && canAddMoreEffects
+                            ? classNames.triggerButton
+                            : classNames.triggerButtonDisabled
+                        }
+                        disabled={cost < 0 || !canAddMoreEffects}
+                        title={
+                          !canAddMoreEffects
+                            ? `Maximum effects reached (${maxEffectsAllowed})`
+                            : cost < 0
+                              ? `Not available`
+                              : `Add this effect`
+                        }
+                      >
+                        {triggerKey}
+                        :
+                        {` `}
+                        {cost}
+                        {` pts`}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         ))}
       </div>

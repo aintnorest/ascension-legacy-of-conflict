@@ -1,25 +1,24 @@
 export const RESPONSE_ACTIONS = {
   negateDisplacement: {
     name: `Negate Displacement (Self)`,
-    description: `Cannot be pushed or thrown this attack`,
+    description: `Cannot be pushed or thrown this turn`,
     trigger: `When targeted by push or throw`,
     cost: 12,
     category: `defensive`,
   },
   reduceDisplacement: {
     name: `Reduce Displacement (Self, 2")`,
-    description: `Reduce push/knockback distance by 2"`,
-    trigger: `When pushed or knocked back`,
+    description: `Reduce push or throw distance by 2"`,
+    trigger: `When pushed or thrown`,
     cost: 8,
     category: `defensive`,
   },
   displaceSelfReaction: {
-    name: `Displace Self (Reaction, 1")`,
-    description: `Move 1" before attack resolves`,
+    name: `Displace Self (Reaction, 2")`,
+    description: `Move 2" before attack resolves. If moved out of range, attack fails`,
     trigger: `When targeted by an attack`,
     cost: 8,
     category: `evasive`,
-    range: `1"`,
   },
   increaseDefense: {
     name: `Increase Defense`,

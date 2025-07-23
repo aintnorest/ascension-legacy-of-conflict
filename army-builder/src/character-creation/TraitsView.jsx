@@ -37,23 +37,34 @@ const classNames = {
   limitWarning: `bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4 text-sm text-yellow-800`,
 };
 
-export default function TraitsView({ onAddTrait }) {
+export default function TraitsView({ onAddTrait, character }) {
   const [selectedCategory, setSelectedCategory] = useState(`all`);
   const [customNames, setCustomNames] = useState({});
+
+  // Helper to check if a trait can be added
+  const canAddTrait = (traitKey, trait) => {
+    // Allow taking multiple if explicitly allowed
+    if (trait.canTakeMultiple) return true;
+
+    // Otherwise, check if character already has this trait
+    if (!character?.traits) return true;
+
+    return !character.traits.some(t => t.type === `trait` && t.key === traitKey);
+  };
 
   // Group traits by category using shared helper
   const groupedTraits = groupActionsByCategory(TRAITS);
   const categories = getCategoryOptions(groupedTraits);
 
-  // Filter traits based on selected category using shared helper
+  // Filter traits based on selected category and availability
   const filteredTraits = getFilteredActions(
     TRAITS,
     groupedTraits,
     selectedCategory,
-  );
+  ).filter(trait => canAddTrait(trait.key, trait));
 
   const handleAddTrait = (traitKey, trait) => {
-    if (!onAddTrait) return;
+    if (!onAddTrait || !canAddTrait(traitKey, trait)) return;
 
     const customName = customNames[traitKey]?.trim();
 
@@ -61,6 +72,7 @@ export default function TraitsView({ onAddTrait }) {
       id: uuidv4(),
       type: `trait`,
       subType: `trait`,
+      key: traitKey, // Add key for duplicate checking
       name: customName || trait.name,
       description: trait.description,
       cost: trait.cost,

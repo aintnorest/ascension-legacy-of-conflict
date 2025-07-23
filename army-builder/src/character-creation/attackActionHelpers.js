@@ -89,7 +89,7 @@ export const getEffectiveAttackSkill = (attackSkill, selectedTemplate, tokenUsag
   const template = ATTACK_TEMPLATES[selectedTemplate];
   if (!template) return attackSkill;
 
-  const baseSkill = tokenUsage === `double` ? attackSkill : Math.max(0, attackSkill - 2);
+  const baseSkill = tokenUsage === `double` ? attackSkill : attackSkill - 2;
   return baseSkill + template.attackSkillModifier;
 };
 

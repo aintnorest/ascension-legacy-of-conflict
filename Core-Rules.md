@@ -479,6 +479,27 @@ Rules for pushing characters and resulting damage:
 - Push target directly away by half the size difference (minimum 1")
 - CANNOT push targets more than one size larger than the pusher
 
+**Throw:**
+
+- Requires an Ability Action that grants throwing capability
+- Target MUST be in base contact and at least 2 sizes smaller than thrower
+- Distance = Size difference (minimum 1", maximum = base × 2)
+
+**Throw Process:**
+
+1. Declare target and direction
+2. Move target in straight line for calculated distance
+3. Resolve any impacts during movement
+
+**Impact Resolution:**
+
+- **Thrown target** always suffers 1 Wound (ignores Defense). If thrown target is terrain, it is destroyed.
+- **Impacted target** (terrain or character) suffers damage = Thrown target's Size - Impacted target's Defense
+- **Additional Effects:**
+  - Impacted character gains one condition (**Slow**, **Weaken**, or **Hinder**, owner's choice) and both displaced to avoid contact
+  - Fragile terrain smaller than thrown target is destroyed regardless of damage
+- **No Impact:** Thrown target gains **Slow** condition
+
 **Falling:**
 
 - Character falls when moved to an unsupported position

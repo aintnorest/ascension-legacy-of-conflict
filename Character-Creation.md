@@ -76,10 +76,10 @@ Model base size determines the character's Size Category.
 | Base Size | Size Value | Cost |
 | --- | --- | --- |
 | 25-39mm | 1 | 0 |
-| 40-59mm | 2 | 1 |
-| 60-89mm | 3 | 2 |
-| 90-129mm | 4 | 4 |
-| 130-170mm | 5 | 5 |
+| 40-59mm | 2 | 2 |
+| 60-89mm | 3 | 4 |
+| 90-129mm | 4 | 6 |
+| 130-170mm | 5 | 8 |
 
 ### Base Stats by Size
 
@@ -87,11 +87,11 @@ Base stats for each Size Category. These stats are used as the foundation for ch
 
 | 📐 Size | 👟 Strides | ❤️ Wounds | 🌐 Influence | ⚔️ Attack Skill | 🛡️ Defense |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 3 | 1 | 0" | 0 | 2 |
-| 2 | 2 | 1 | 1" | 0 | 2 |
-| 3 | 2 | 1 | 3" | 0 | 2 |
-| 4 | 1 | 2 | 4" | 0 | 2 |
-| 5 | 1 | 2 | 5" | 0 | 2 |
+| 1 | 3 | 4 | 0" | 0 | 2 |
+| 2 | 2 | 4 | 1" | 0 | 2 |
+| 3 | 2 | 4 | 3" | 0 | 2 |
+| 4 | 1 | 5 | 4" | 0 | 2 |
+| 5 | 1 | 5 | 5" | 0 | 2 |
 
 ## Stat Allocation Rules
 
@@ -104,10 +104,10 @@ Cost of increasing Strides based on Size Category.
 | Size Value | Base Strides | Cost per Additional Stride |
 | --- | --- | --- |
 | 1 | 3 | 2 |
-| 2 | 2 | 3 |
-| 3 | 2 | 4 |
-| 4 | 1 | 5 |
-| 5 | 1 | 6 |
+| 2 | 2 | 4 |
+| 3 | 2 | 8 |
+| 4 | 1 | 10 |
+| 5 | 1 | 12 |
 
 ### Wound Upgrade Costs
 
@@ -115,11 +115,10 @@ Cost of increasing Wounds.
 
 | Upgrade Level | Incremental Cost | Cumulative Cost |
 | --- | --- | --- |
-| +1 | 1 | 1 |
-| +2 | 2 | 3 |
-| +3 | 3 | 6 |
-| +4 | 4 | 10 |
-| +5 | 5 | 15 |
+| +1 | 2 | 2 |
+| +2 | 4 | 6 |
+| +3 | 6 | 12 |
+| +4 | 8 | 20 |
 
 ### Attack Skill Upgrade Costs
 
@@ -279,6 +278,30 @@ Initial Range Cost Upgrades:
 - 7" (15 points)
 - 8" (18 points)
 
+#### Attack Effect Limits
+
+Attack Actions can include effects that trigger under specific conditions. However, the number of effects an attack can have is limited by the character's Attack Skill.
+
+Effect Limit Rule:
+
+- Attacks can have 1 effect per 2 Attack Skill points (minimum 1 effect if Attack Skill ≥ 0)
+- This limit is based on the character's base Attack Skill, unmodified by template type or action token usage
+
+Examples:
+
+- Attack Skill 0: Maximum 1 effect
+- Attack Skill 1: Maximum 1 effect
+- Attack Skill 2: Maximum 1 effect
+- Attack Skill 3: Maximum 2 effects
+- Attack Skill 4: Maximum 2 effects
+- Attack Skill 5: Maximum 3 effects
+- Attack Skill 6: Maximum 3 effects
+- Attack Skill 7: Maximum 4 effects
+
+The calculation is: Maximum Effects = floor((Attack Skill + 2) / 2)
+
+This ensures that more skilled attackers can create more complex attacks while preventing overwhelming combinations at low skill levels.
+
 #### Movement Effects
 
 Attack effects in the Movement Effects category.
@@ -304,22 +327,22 @@ Move attacker within 1" of target
 
 #### Displace Defender
 
-Move target within 1" of original position
+Place target within 1" of original position
 
 | Trigger | Cost |
 | --- | --- |
-| 🃏✔️ | 5 points |
-| 🃏✖️ | 6 points |
-| 🃏✔️✖️ | 7 points |
-| ♣️✔️ | 3 points |
-| ♣️✖️ | 4 points |
-| ♣️✔️✖️ | 5 points |
-| ♣️♦️✔️ | 1 points |
-| ♣️♦️✖️ | 2 points |
-| ♣️♦️✔️✖️ | 3 points |
-| ♣️♣️✔️ | 0 points |
-| ♣️♣️✖️ | 1 points |
-| ♣️♣️✔️✖️ | 2 points |
+| 🃏✔️ | 10 points |
+| 🃏✖️ | 11 points |
+| 🃏✔️✖️ | 12 points |
+| ♣️✔️ | 8 points |
+| ♣️✖️ | 9 points |
+| ♣️✔️✖️ | 10 points |
+| ♣️♦️✔️ | 4 points |
+| ♣️♦️✖️ | 5 points |
+| ♣️♦️✔️✖️ | 6 points |
+| ♣️♣️✔️ | 2 points |
+| ♣️♣️✖️ | 3 points |
+| ♣️♣️✔️✖️ | 4 points |
 
 #### Knockback
 
@@ -342,41 +365,22 @@ Push target 1" directly away
 
 #### Throw
 
-Throw target if 2 sizes smaller
+Throw target if at least 2 sizes smaller
 
 | Trigger | Cost |
 | --- | --- |
-| 🃏✔️ | 7 points |
-| 🃏✖️ | 8 points |
-| 🃏✔️✖️ | 9 points |
-| ♣️✔️ | 5 points |
-| ♣️✖️ | 6 points |
-| ♣️✔️✖️ | 7 points |
-| ♣️♦️✔️ | 3 points |
-| ♣️♦️✖️ | 4 points |
-| ♣️♦️✔️✖️ | 5 points |
+| 🃏✔️ | 10 points |
+| 🃏✖️ | 11 points |
+| 🃏✔️✖️ | 12 points |
+| ♣️✔️ | 8 points |
+| ♣️✖️ | 9 points |
+| ♣️✔️✖️ | 10 points |
+| ♣️♦️✔️ | 4 points |
+| ♣️♦️✖️ | 5 points |
+| ♣️♦️✔️✖️ | 6 points |
 | ♣️♣️✔️ | 2 points |
 | ♣️♣️✖️ | 3 points |
 | ♣️♣️✔️✖️ | 4 points |
-
-#### Throw Terrain
-
-Throw terrain if 2 sizes smaller
-
-| Trigger | Cost |
-| --- | --- |
-| 🃏✔️ | 6 points |
-| 🃏✖️ | 7 points |
-| 🃏✔️✖️ | 8 points |
-| ♣️✔️ | 4 points |
-| ♣️✖️ | 5 points |
-| ♣️✔️✖️ | 6 points |
-| ♣️♦️✔️ | 2 points |
-| ♣️♦️✖️ | 3 points |
-| ♣️♦️✔️✖️ | 4 points |
-| ♣️♣️✔️ | 1 points |
-| ♣️♣️✖️ | 2 points |
-| ♣️♣️✔️✖️ | 3 points |
 
 #### Temporary Effects
 
@@ -407,18 +411,18 @@ Add 1 Slow Token to the Defender
 
 | Trigger | Cost |
 | --- | --- |
-| 🃏✔️ | 4 points |
-| 🃏✖️ | 5 points |
-| 🃏✔️✖️ | 6 points |
-| ♣️✔️ | 2 points |
-| ♣️✖️ | 3 points |
-| ♣️✔️✖️ | 4 points |
-| ♣️♦️✔️ | 1 points |
-| ♣️♦️✖️ | 2 points |
-| ♣️♦️✔️✖️ | 3 points |
-| ♣️♣️✔️ | 0 points |
-| ♣️♣️✖️ | 1 points |
-| ♣️♣️✔️✖️ | 2 points |
+| 🃏✔️ | 5 points |
+| 🃏✖️ | 6 points |
+| 🃏✔️✖️ | 7 points |
+| ♣️✔️ | 3 points |
+| ♣️✖️ | 4 points |
+| ♣️✔️✖️ | 5 points |
+| ♣️♦️✔️ | 2 points |
+| ♣️♦️✖️ | 3 points |
+| ♣️♦️✔️✖️ | 4 points |
+| ♣️♣️✔️ | 1 points |
+| ♣️♣️✖️ | 2 points |
+| ♣️♣️✔️✖️ | 3 points |
 
 #### Weaken
 
@@ -497,17 +501,16 @@ Special abilities that can be activated during gameplay. A model MAY only use on
 | Ability Action | Description | Cost |
 | --- | --- | --- |
 | **Control** |  |  |
-| Displace Target (Reach, Size -2) | Throw target 2 sizes smaller that is in base contact. | 12 points |
-| Displace Terrain (Reach, Size -2) | Throw terrain 2 sizes smaller that is in base contact. | 10 points |
-| Compel Movement (LOS, 4") | Target can only move toward this model on its next activation | 8 points |
+| Throw Target |  | 14 points |
+| Throw Terrain |  | 10 points |
+| Compel Movement |  | 7 points |
 |  |  |  |
 | **Movement** |  |  |
-| Displace Self (LOS, 6") | Place this model anywhere within 6" and line of sight | 6 points |
-| Shift Self (1") | Move this model 1"; does not count as movement | 4 points |
-| Displace Self (No LOS, 4") | Place this model anywhere within 4", ignoring line of sight | 8 points |
+| Displace Self |  | 9 points |
+| Shift Self |  | 6 points |
 |  |  |  |
 | **Utility** |  |  |
-| Remove Temporary Effect (4") | Remove one temporary effect on a model within 4" | 8 points |
+| Remove Temporary Effect |  | 8 points |
 
 ### Response Actions
 
@@ -518,12 +521,12 @@ Unless explicitly stated otherwise, a model CANNOT purchase the same exact respo
 | Response | Trigger | Description | Cost |
 | --- | --- | --- | --- |
 | **Defensive** |  |  |  |
-| Negate Displacement (Self) | When targeted by push or throw | Cannot be pushed or thrown this attack | 12 points |
-| Reduce Displacement (Self, 2") | When pushed or knocked back | Reduce push/knockback distance by 2" | 8 points |
-| Increase Defense | When targeted by an attack | Draw 3 cards for defense and discard 1 of player's choice | 8 points |
+| Negate Displacement (Self) | When targeted by push or throw | Cannot be pushed or thrown this turn | 12 points |
+| Reduce Displacement (Self, 2") | When pushed or thrown | Reduce push or throw distance by 2" | 8 points |
+| Increase Defense | When targeted by an attack | Draw 1 card for defense | 8 points |
 |  |  |  |  |
 | **Evasive** |  |  |  |
-| Displace Self (Reaction, 1") | When targeted by an attack | Move 1" before attack resolves | 8 points |
+| Displace Self (Reaction, 2") | When targeted by an attack | Move 2" before attack resolves. If moved out of range, attack fails | 8 points |
 
 ## Traits
 
@@ -532,34 +535,29 @@ Always-on effects that define a model's inherent capabilities. Traits are always
 | Ability | Description | Cost |
 | --- | --- | --- |
 | **Aura** |  |  |
-| Grant Defense Bonus (Aura, 2") | Friendly models within 2" gain +1 Defense | 10 points |
+| Grant Defense Bonus (Aura, 2") | Friendly models within 3" gain +1 Defense | 10 points |
 | Attack Penalty Aura (2"+Influence) | -1 to attacks within 2"+influence | 5 points |
 |  |  |  |
 | **Defense** |  |  |
-| Reduce Wound Taken (Min 1) | Reduces all incoming damage by 1 (min 1) | 15 points |
-| Reduce Wound Taken (Min 2) | Reduces all incoming damage by 2 (min 2) | 16 points |
-| Increase Displacement Size (+2) | +2 size vs push/throw | 10 points |
-| Defense Bonus vs Ranged | +2 defense vs ranged attacks | 6 points |
-| Attack Penalty vs Distant (6"+) | -2 to attacks from beyond 6" | 8 points |
+| Reduce Wound Taken (By 1, Min 1) | Reduces all incoming damage by 1 (min 1) | 14 points |
+| Reduce Wound Taken (By 2, Min 1) | Reduces all incoming damage by 2 (min 1) | 18 points |
+| Defense Bonus vs Ranged | +2 defense vs ranged attacks | 8 points |
+| Attack Penalty vs Distant (6"+) | +1 defense against attacks from beyond 6" | 8 points |
+| Increase vs Displacement Size (+1) | +1 size vs push/throw | 5 points |
 | Increase vs Displacement Size (+2) | +2 size vs push/throw | 8 points |
-| Always Partial Cover | Always benefits from Partial Cover (R-6.2.2) | 7 points |
-| Increase Cover Bonus | Increase cover +1 | 6 points |
-| Increase vs Displacement Size (+1) | +1 size vs push/throw | 4 points |
-|  |  |  |
-| **Immunity** |  |  |
-| Displacement Immunity (Size ≤ Self) | Immune to Push and Throw from models of equal/lesser Size | 12 points |
+| Increase Cover Bonus | Increase cover bonus by +1 | 6 points |
 |  |  |  |
 | **Healing** |  |  |
-| Regenerate Self (End of Activation) | At end of activation, heal 1 Wound if no active DOT | 12 points |
+| Regenerate Self | At end of activation, heal 1 Wound if no active DOT | 12 points |
 |  |  |  |
 | **Offense** |  |  |
 | Attack Bonus vs Large (Size 3+) | +1 to Attack Skill when targeting models with Size 3+ | 5 points |
-| Attack Bonus If Stationary | +2 to attack if no move action this turn | 8 points |
-| Increase For Displacement Size (+1) | +1 size for push/throw | 6 points |
+| Attack Bonus If Stationary | +1 to attack if no move action this turn | 5 points |
+| Increase For Displacement Size (+1) | +1 size for push/throw | 7 points |
+| Increase For Displacement Size (+2) | +2 size for push/throw | 4 points |
 |  |  |  |
 | **Movement** |  |  |
-| Ignore Climb Penalty | Ignores extra Stride cost for Climbing (R-5.2.4) | 6 points |
-| Ignore Movement Penalties | Ignores all movement penalties except the Slow condition | 9 points |
+| Ignore Climb Penalty | Ignores extra Stride cost for Climbing | 6 points |
 |  |  |  |
 | **Utility** |  |  |
-| Ignore Obscured/Stealth | Ignores Obscured terrain (R-6.2.2) and enemy Stealth Field | 9 points |
+| Displacement Immunity (Size ≤ Self) | Immune to Push and Throw from models of equal/lesser Size | 12 points |

@@ -146,15 +146,18 @@ export default function Card({
 
       {/* Facets/Actions Container */}
       <div className={classNames.facetsContainer} style={{ alignContent: `flex-start` }}>
-        {allFacets.map((facet, idx) => (
-          <Facet
-            key={facet.id || idx}
-            attackSkill={character.stats?.attackSkill}
-            edit={edit}
-            onDelete={onFacetDelete ? () => onFacetDelete(facet.type, facet.id, facet) : null}
-            {...facet}
-          />
-        ))}
+        {allFacets.map((facet, idx) => {
+          const { key: _key, ...facetProps } = facet;
+          return (
+            <Facet
+              key={facet.id || idx}
+              attackSkill={character.stats?.attackSkill}
+              edit={edit}
+              onDelete={onFacetDelete ? () => onFacetDelete(facet.type, facet.id, facet) : null}
+              {...facetProps}
+            />
+          );
+        })}
       </div>
 
       {/* Tooltips */}

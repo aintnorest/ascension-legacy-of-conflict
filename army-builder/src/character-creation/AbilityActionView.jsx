@@ -13,20 +13,33 @@ import {
 
 const classNames = getSharedActionViewClasses(`blue`);
 
-export default function AbilityActionView({ onAddAbilityAction }) {
+export default function AbilityActionView({ onAddAbilityAction, character = {} }) {
   const [selectedCategory, setSelectedCategory] = useState(`all`);
   const [customNames, setCustomNames] = useState({});
+
+  // Get existing ability actions from character
+  const existingAbilities = character.abilityActions || [];
+  const existingAbilityKeys = existingAbilities.map((ability) => {
+    // Find the original key by matching name and cost
+    const foundEntry = Object.entries(ACTION_ABILITIES).find(([, abilityDef]) =>
+      abilityDef.name === ability.name && abilityDef.cost === ability.cost,
+    );
+    return foundEntry ? foundEntry[0] : null;
+  }).filter(Boolean);
 
   // Group abilities by category using shared helper
   const groupedAbilities = groupActionsByCategory(ACTION_ABILITIES);
   const categories = getCategoryOptions(groupedAbilities);
 
-  // Filter abilities based on selected category using shared helper
+  // Filter abilities based on selected category and availability using shared helper
   const filteredAbilities = getFilteredActions(
     ACTION_ABILITIES,
     groupedAbilities,
     selectedCategory,
-  );
+  ).filter((ability) => {
+    // Show ability if it can be taken multiple times OR if character doesn't already have it
+    return ability.canTakeMultiple || !existingAbilityKeys.includes(ability.key);
+  });
 
   const handleAddAbility = (abilityKey, ability) => {
     if (!onAddAbilityAction) return;
@@ -38,13 +51,14 @@ export default function AbilityActionView({ onAddAbilityAction }) {
       type: `action`,
       subType: `ability`,
       name: customName || ability.name,
-      description: ability.description,
+      descriptions: ability.descriptions,
       cost: ability.cost,
       category: ability.category,
       targeting: ability.targeting,
       range: ability.range,
       requiresLOS: ability.requiresLOS,
       sizeRequirement: ability.sizeRequirement,
+      canTakeMultiple: ability.canTakeMultiple,
     };
 
     onAddAbilityAction(abilityData);
@@ -68,7 +82,12 @@ export default function AbilityActionView({ onAddAbilityAction }) {
       </div>
 
       <div className={classNames.rules}>
-        <strong>Custom names are optional and help personalize your character</strong>
+        <strong>Ability Action Rules:</strong>
+        <ul className="mt-1 space-y-1">
+          <li>• Characters can only have one of each ability action unless specifically noted</li>
+          <li>• Custom names are optional and help personalize your character</li>
+          <li>• A character may only use one ability action per turn</li>
+        </ul>
       </div>
 
       {/* Category Filter */}
@@ -116,7 +135,21 @@ export default function AbilityActionView({ onAddAbilityAction }) {
                   </div>
                 </div>
 
-                <p className={classNames.abilityDescription}>{ability.description}</p>
+                <div className={classNames.abilityDescription}>
+                  {ability.descriptions.map((desc, index) => (
+                    <div key={index} className="mb-1">
+                      <strong>{desc.symbol}</strong>
+                      {` `}
+                      {desc.description}
+                    </div>
+                  ))}
+                </div>
+
+                {ability.canTakeMultiple && (
+                  <div className="text-xs text-green-600 font-medium mb-2">
+                    ✓ Can be taken multiple times
+                  </div>
+                )}
 
                 {details.length > 0 && (
                   <div className={classNames.abilityDetails}>

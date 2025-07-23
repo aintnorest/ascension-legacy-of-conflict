@@ -36,6 +36,14 @@ jobs:
           cd army-builder
           npm ci
       
+      - name: Clean and regenerate documentation
+        run: |
+          cd army-builder
+          # Remove existing markdown files from public folder
+          rm -f public/*.md
+          # Generate fresh documentation
+          npm run docs:generate
+      
       - name: Build
         run: |
           cd army-builder

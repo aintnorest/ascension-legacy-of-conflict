@@ -2,12 +2,12 @@ import { STATS_SYMBOLS } from './symbols.js';
 
 export const BASE_STATS_TABLE = [
   { value: 0.5, min: 0, max: 24, strides: 4, wounds: 1, influence: `0"`, attackSkill: 0, defense: 1, sizeCost: 0, terrainOnly: true, exampleReferences: `Dog, mailbox, crate` },
-  { value: 1, min: 25, max: 39, strides: 3, wounds: 1, influence: `0"`, attackSkill: 0, defense: 2, sizeCost: 0, exampleReferences: `Human, humanoid` },
-  { value: 2, min: 40, max: 59, strides: 2, wounds: 1, influence: `1"`, attackSkill: 0, defense: 2, sizeCost: 1, exampleReferences: `Large human, motorcycle` },
-  { value: 3, min: 60, max: 89, strides: 2, wounds: 1, influence: `3"`, attackSkill: 0, defense: 2, sizeCost: 2, exampleReferences: `Car, large dumpster` },
-  { value: 4, min: 90, max: 129, strides: 1, wounds: 2, influence: `4"`, attackSkill: 0, defense: 2, sizeCost: 4, exampleReferences: `Dump truck, small building` },
-  { value: 5, min: 130, max: 170, strides: 1, wounds: 2, influence: `5"`, attackSkill: 0, defense: 2, sizeCost: 5, exampleReferences: `Medium building` },
-  { value: 6, min: 171, max: 999, strides: 1, wounds: 3, influence: `6"`, attackSkill: 0, defense: 3, sizeCost: 8, terrainOnly: true, exampleReferences: `Large building` },
+  { value: 1, min: 25, max: 39, strides: 3, wounds: 4, influence: `0"`, attackSkill: 0, defense: 2, sizeCost: 0, exampleReferences: `Human, humanoid` },
+  { value: 2, min: 40, max: 59, strides: 2, wounds: 4, influence: `1"`, attackSkill: 0, defense: 2, sizeCost: 2, exampleReferences: `Large human, motorcycle` },
+  { value: 3, min: 60, max: 89, strides: 2, wounds: 4, influence: `3"`, attackSkill: 0, defense: 2, sizeCost: 4, exampleReferences: `Car, large dumpster` },
+  { value: 4, min: 90, max: 129, strides: 1, wounds: 5, influence: `4"`, attackSkill: 0, defense: 2, sizeCost: 6, exampleReferences: `Dump truck, small building` },
+  { value: 5, min: 130, max: 170, strides: 1, wounds: 5, influence: `5"`, attackSkill: 0, defense: 2, sizeCost: 8, exampleReferences: `Medium building` },
+  { value: 6, min: 171, max: 999, strides: 1, wounds: 6, influence: `6"`, attackSkill: 0, defense: 3, sizeCost: 8, terrainOnly: true, exampleReferences: `Large building` },
 ];
 
 export const STAT_COSTS_AND_MAX = {
@@ -33,9 +33,9 @@ export const STAT_COSTS_AND_MAX = {
     icon: STATS_SYMBOLS.WOUNDS,
     name: `Wounds`,
     baseValue: `wounds`, // property name in sizeRows
-    maxUpgrades: 5,
+    maxUpgrades: 4,
     costType: `progressive`,
-    costs: [1, 2, 3, 4, 5], // incremental costs
+    costs: [2, 4, 6, 8], // incremental costs
     description: `Each additional Wound beyond the model's Base Wounds costs progressively more.`,
   },
   defense: {
